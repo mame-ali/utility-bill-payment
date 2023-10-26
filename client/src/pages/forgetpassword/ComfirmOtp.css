@@ -1,0 +1,14 @@
+/* ConfirmOTP.css */
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 400px;
+}
+
+h2 {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+/* Add additional styles as needed */

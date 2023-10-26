@@ -1,0 +1,66 @@
+/* .addElectric {
+	background-color: aqua;
+} */
+/* addElectric.css */
+
+/* .addElectric {
+	padding: 0 5rem;
+	margin: 5rem;
+}
+
+.ps-5 {
+	padding-left: 5rem;
+}
+
+.pe-5 {
+	padding-right: 5rem;
+}
+
+.ms-5 {
+	margin-left: 5rem;
+}
+
+.me-5 {
+	margin-right: 5rem;
+}
+
+.mt-5 {
+	margin-top: 5rem;
+}
+
+.mb-5 {
+	margin-bottom: 5rem;
+} */
+
+.addElectric {
+	background-color: rgb(86, 164, 150);
+	padding: 10px;
+}
+
+.addElectric form {
+	margin-bottom: 15px;
+}
+
+.addElectric label {
+	color: white;
+	font-weight: bold;
+}
+
+.addElectric input[type="text"],
+.addElectric select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.addElectric button[type="submit"] {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+.addElectric button[type="submit"]:hover {
+	background-color: #45a049;
+}

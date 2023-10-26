@@ -1,0 +1,57 @@
+.prepaid-container {
+	background-color: #f5f5f5;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.prepaid-header {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.prepaid-paragraph {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.prepaid-steps {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+	margin-bottom: 20px;
+}
+
+.prepaid-step {
+	display: flex;
+	align-items: center;
+}
+
+.prepaid-step-number {
+	font-size: 24px;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #007bff;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+}
+
+.prepaid-step-description {
+	flex-grow: 1;
+}
+
+.prepaid-step-description h3 {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.prepaid-step-description p {
+	font-size: 16px;
+	margin-bottom: 10px;
+}

@@ -1,0 +1,22 @@
+.postpaid-container {
+	background-color: #f5f5f5;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.postpaid-header {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.postpaid-paragraph {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.postpaid-list {
+	font-size: 18px;
+	margin-bottom: 10px;
+	padding-left: 20px;
+}

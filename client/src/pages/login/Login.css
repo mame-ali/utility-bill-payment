@@ -1,0 +1,76 @@
+/* body {
+	background-color: rgb(200, 222, 230);
+	color: #fff;
+	font-family: Arial, sans-serif;
+} */
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 400px;
+	/* background-color: rgb(200, 222, 230); */
+}
+
+.form {
+	width: 400px;
+	background-color: #fff;
+	padding: 15px;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	background-color: rgb(58, 149, 219);
+	color: #fff;
+}
+
+.form h2 {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.form .form-group {
+	margin-bottom: 20px;
+}
+
+.form label {
+	font-weight: bold;
+}
+
+.form input[type="email"],
+.form input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.form button[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	background-color: #ff0000;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.form .links {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 16px;
+}
+
+.form .links a {
+	color: rgb(243, 107, 100);
+	text-decoration: none;
+}
+
+.form .links a:first-child {
+	text-transform: uppercase;
+}
+
+.form .links a:last-child {
+	color: #fff;
+}

@@ -1,0 +1,52 @@
+/* GettingElectricityComponent.css */
+
+.getting-electricity-container {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+}
+
+.getting-electricity-header {
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.getting-electricity-subheader {
+	font-size: 18px;
+	color: #666;
+	margin-bottom: 8px;
+}
+
+.getting-electricity-content {
+	margin-top: 20px;
+}
+
+.getting-electricity-list {
+	list-style-type: disc;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.getting-electricity-item {
+	margin-bottom: 5px;
+}
+
+.getting-electricity-paragraph {
+	margin-bottom: 10px;
+}
+
+/* Additional styles for specific sections */
+
+.getting-electricity-content:nth-child(2) {
+	margin-top: 40px;
+}
+
+.getting-electricity-content:nth-child(4) {
+	margin-top: 40px;
+}
+
+.getting-electricity-content:last-child {
+	margin-bottom: 40px;
+}
+
+/* Add more custom styles as needed */
