@@ -112,3 +112,15 @@ SELECT org_role_name
 FROM org_role
 JOIN users_role ON org_role.org_role_id = users_role.org_role_id
 WHERE users_role.user_id = 1;
+USE utility;
+SHOW TABLEs;
+SELECT * FROM  users;
+SELECT * from 	
+users_role;
+
+UPDATE users_role
+SET org_role_id = (SELECT org_role_id FROM org_role WHERE org_role_name = 'admin')
+WHERE user_id = 1;
+
+SELECT org_role_id FROM org_role WHERE org_role_name = 'admin';
+SELECT org_role_id FROM org_role WHERE org_role_name = 'admin';
