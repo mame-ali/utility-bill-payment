@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -13,6 +13,9 @@ import { UserContext } from "../../context/UserContext";
 function HeadLogin() {
 	const [userData, setUserData] = useContext(UserContext);
 	const navigate = useNavigate();
+	useEffect(()=>{
+		console.log(userData);
+	},[]);
 
 	const handlelogout = () => {
 		setUserData((userData) => ({

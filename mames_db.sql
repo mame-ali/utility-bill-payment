@@ -1,8 +1,7 @@
 DROP DATABASE IF EXISTS `utility`;
-CREATE DATABASE `utility`;
+CREATE DATABASE IF NOT EXISTS `utility`;
 USE `utility`;
 
-DROP TABLE USERS;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `user_email` VARCHAR(45) NOT NULL,
@@ -105,6 +104,6 @@ drop TABLE bills , electric_meter,electric_meter_address,
 meter_read,org_role,
 users, users_info,
 users_password,users_profile,users_role;
-
+use utility;
 INSERT INTO org_role (org_role_name)
 VALUES ('normal'),('reader'),('admin');
