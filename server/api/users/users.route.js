@@ -6,6 +6,8 @@ import userController from "./users.controler.js";
 const usersRouter = express.Router();
 // usersRouter.put('/assignrole', userController.assignRole);
 usersRouter.get("/users", userController.AllUser);
+
+usersRouter.get("/getuserRole/:id", userController.getUserRole);
 usersRouter.post("/insertreaddata", userController.insertReadData);
 usersRouter.get("/electricmeters", userController.AllElectricMeters);
 usersRouter.get("/meterread", userController.AllMetersRead);

@@ -7,14 +7,20 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import PersonIcon from "@mui/icons-material/Person";
+import axios from '../../utils/axios'
 // import { UserContext } from "../../context/UserContext";
 import { UserContext } from "../../context/UserContext";
 
 function HeadLogin() {
 	const [userData, setUserData] = useContext(UserContext);
+	
 	const navigate = useNavigate();
-	useEffect(()=>{
-		console.log(userData);
+	useEffect(async ()=>{
+	console.log(userData.user['id']);
+		let id = userData.user['id'];
+	// const response  = await axios.get(`/getuserRole/:${id}`);
+	// console.log(response);
+
 	},[]);
 
 	const handlelogout = () => {
@@ -25,6 +31,7 @@ function HeadLogin() {
 		navigate("/login");
 	};
 
+	console.log(userData);
 	return (
 		<Navbar expand="lg" className="bg-body-tertiary">
 			<Container fluid>
@@ -54,14 +61,17 @@ function HeadLogin() {
 					<Link to="/electricmeter" className="nav-link me-5">
 						Electric Meter
 					</Link>
-					{userData.user && (
+					{userData.user && userData.user.userRole == 'reader' &&
+					 (
 						<Link to="/read" className="nav-link me-5">
 							Read
 						</Link>
 					)}
-					<Link to="/users" className="nav-link me-5">
+					{userData.user && userData.user.userRole =='admin'  &&
+						<Link to="/users" className="nav-link me-5">
 						Users
 					</Link>
+					}
 					<div className="pe-5">
 						{userData.user && (
 							<NavDropdown

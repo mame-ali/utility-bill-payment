@@ -44,7 +44,11 @@ function Login() {
 
 		try {
 			const response = await axios.post("/users/login", formData);
-			console.log(response);
+			// console.log({
+			// 	token: response.data.token,
+			// 	user: response.data.user,
+			// });
+
 			alert(response.data.msg);
 			setUserData({
 				token: response.data.token,

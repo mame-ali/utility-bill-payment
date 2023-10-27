@@ -141,7 +141,16 @@ const userService = {
 			return callback(null, result);
 		});
 	},
-
+	//get user Role
+	getUserRole: (data, callback) => {
+		const getUserRoleQuery = query.getUserRole;
+		connection.query(getUserRoleQuery, [data], (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
 	//InsertBill
 	InsertBill: (data, callback) => {
 		const insertBill = query.insertBill;
@@ -173,9 +182,6 @@ const userService = {
 
 	// add user role
 	addUserrole: (data, callback) => {
-		// console.log("------------------------------");
-		// console.log(data)
-		//  console.log("------------------------------");
 		const insertIntoUsersrole = query.insertIntoUsersrole;
 		connection.query(
 			insertIntoUsersrole,

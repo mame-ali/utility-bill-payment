@@ -3,6 +3,7 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
     const [userData, setUserData] = useState({
         user: undefined,
+        userRole: undefined,
         token: undefined
     });
     return (

@@ -93,7 +93,28 @@ const userController = {
 			}
 		});
 	},
+	getUserRole: (req,res) => {
+		const user_id = req.params.id;
+		if(!user_id){
+			return res.status(500)
+			.json({
+				msg: 'please login'
 
+			});
+		}
+		userService.getUserRole(user_id,(err, results) => {
+			if (err) {
+				console.log(err);
+				res.status(500).json({ msg: "database connection err" });
+			}
+			return res.status(200).json({
+				msg: "sucess",
+				userRole: results[0].org_role_name
+			});
+		
+		})
+
+	},
 	insertReadData: (req, res) => {
 		userService.getAllusersbyAccount(
 			req.body.account_number,
@@ -256,6 +277,7 @@ const userController = {
 	//login
 	login: (req, res) => {
 		const { email, password } = req.body;
+		let userRole;
 		console.log(req.body);
 		//validation
 		if (!email || !password)
@@ -293,21 +315,43 @@ const userController = {
 					return res.status(404).json({
 						msg: "Either the user name or password your entered is incorrect",
 					});
-				//token geneate
+				//get user Role 
+				userService.getUserRole(user_id,(err, results9) => {
+					if (err) {
+						console.log(err);
+						res.status(500).json({ msg: "database connection err" });
+					}
+				userRole = results9[0]['org_role_name']; 
+			
+								//token geneate
 				const token = jwt.sign(
 					{ id: results[0].user_id, email: email },
 					process.env.JWT_SECRET,
 					{ expiresIn: "30m" }
 				);
+				console.log({
+					token,
+					user: {
+						id: results[0].user_id,
+						email: email,
+						userRole: userRole,
+					},
+					msg: "login sucessfully",
+				});
 				return res.json({
 					token,
 					user: {
 						id: results[0].user_id,
 						email: email,
+						userRole: userRole,
 					},
 					msg: "login sucessfully",
 				});
 			});
+			
+			});
+
+
 
 			// console.log(isMatch )
 		});

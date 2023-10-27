@@ -190,4 +190,9 @@ JOIN electric_meter_address ON electric_meter.electric_meter_id = electric_meter
 JOIN payments AS p ON b.bill_id = p.bill_id
 SET b.bill_status = 0
 WHERE p.payment_id = ?;`,
+getUserRole: `SELECT org_role_name
+FROM org_role
+JOIN users_role ON org_role.org_role_id = users_role.org_role_id
+WHERE users_role.user_id = ?;
+`
 };
