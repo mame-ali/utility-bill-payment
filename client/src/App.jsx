@@ -8,7 +8,7 @@ import "./assets/template_assets/css/color.css";
 import "./App.css";
 // Import the custom css file
 import "./assets/styles/custom.css";
-// import Header from "./component/Header/Header.jsx";
+import Header from "./component/Header/Header.jsx";
 import Home from "./pages/home/Home";
 
 import Footer from "./component/footer/Footer";
@@ -22,7 +22,8 @@ import ForgetPassword from "./pages/forgetpassword/Forgetpassword";
 import Enterpassword from "./pages/forgetpassword/Enterpassword";
 import About from "./pages/about/About";
 import History from "./pages/history/History";
-import HeadLogin from "./component/Header/HeadLogin";
+// import HeadLogin from "./component/Header/HeadLogin";
+
 //services
 import Postpaid from "./pages/postpaid/Pospaid";
 import Prepaid from "./pages/prepaid/Prepaid";
@@ -34,11 +35,16 @@ import Users from "./pages/users/Users";
 import AddElectricMeter from "./pages/add/AddElectricMeter";
 import Electric from "./pages/electric/Electric";
 import Read from "./pages/read/Read";
+// import UpdateRole from "./pages/updateRole/UpdateRole";
+import Manageuser from "./pages/updateRole/ManageUser";
+import HeaderTwo from "./component/Header/HeaderTwo";
+import Faq from "./pages/faq/Faq";
 function App() {
 	return (
 		<>
 			{/* <Header /> */}
-			<HeadLogin />
+			<HeaderTwo />
+			{/* <HeadLogin /> */}
 			<Routes>
 				<Route path="/" element={<Home />} />
 
@@ -51,6 +57,7 @@ function App() {
 				<Route path="/enterpassword" element={<Enterpassword />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/history" element={<History />} />
+				<Route path="/faq" element={<Faq />} />
 
 				<Route path="/postpaid" element={<Postpaid />} />
 				<Route path="/prepaid" element={<Prepaid />} />
@@ -68,6 +75,7 @@ function App() {
 					}
 				/>
 				<Route path="/read" element={<Read />} />
+				<Route path="/manageuser" element={<Manageuser />} />
 				{/* <Route path="/electricmeter" element={<Electric />} />
 				<Route path="/users" element={<Users />} />
 				<Route path="/bills" element={<Bill />} />

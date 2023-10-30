@@ -1,0 +1,15 @@
+.faq-question {
+	display: inline;
+}
+
+.faq-question:nth-child(2n) {
+	color: rgb(76, 216, 207);
+}
+
+.faq-question:nth-child(2n + 1) {
+	color: rgb(
+		255,
+		0,
+		0
+	); /* You can replace this color with your desired color */
+}

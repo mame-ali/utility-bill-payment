@@ -58,7 +58,7 @@ function Signup() {
 				console.log(response);
 				alert(response.data.msg);
 
-				navigate3("/comfotpsec", {
+				navigate3("/comfirmotpsecond", {
 					state: { email: formData.user_email },
 				});
 			} catch (error) {

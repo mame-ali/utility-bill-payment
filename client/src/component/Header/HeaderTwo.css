@@ -1,0 +1,19 @@
+/* Mobile view styles */
+/* @media (max-width: 767px) {
+	.main-header .logo-box {
+		text-align: center; 
+	}
+} */
+
+/* Desktop view styles */
+@media (min-width: 768px) {
+	.main-header .header-upper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between; /* Adjust the layout for desktop */
+	}
+	.main-header .logo-box {
+		text-align: left; /* Reset text alignment for larger screens */
+	}
+	/* Add any other desktop-specific styling here */
+}

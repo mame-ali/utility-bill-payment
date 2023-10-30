@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TextField, Button, InputAdornment } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios from "../../utils/axios";
+import { UserContext } from "../../context/UserContext";
 import "./Login.css";
 
 function Login() {
@@ -11,7 +12,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate();
-
+	const [userData, setUserData] = useContext(UserContext);
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
 	};
@@ -43,8 +44,16 @@ function Login() {
 
 		try {
 			const response = await axios.post("/users/login", formData);
-			console.log(response);
+			// console.log({
+			// 	token: response.data.token,
+			// 	user: response.data.user,
+			// });
+
 			alert(response.data.msg);
+			setUserData({
+				token: response.data.token,
+				user: response.data.user,
+			});
 			navigate("/");
 		} catch (error) {
 			alert(error.response.data.msg);

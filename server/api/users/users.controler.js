@@ -93,7 +93,24 @@ const userController = {
 			}
 		});
 	},
-
+	getUserRole: (req, res) => {
+		const user_id = req.params.id;
+		if (!user_id) {
+			return res.status(500).json({
+				msg: "please login",
+			});
+		}
+		userService.getUserRole(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				res.status(500).json({ msg: "database connection err" });
+			}
+			return res.status(200).json({
+				msg: "sucess",
+				userRole: results[0].org_role_name,
+			});
+		});
+	},
 	insertReadData: (req, res) => {
 		userService.getAllusersbyAccount(
 			req.body.account_number,
@@ -256,6 +273,7 @@ const userController = {
 	//login
 	login: (req, res) => {
 		const { email, password } = req.body;
+		let userRole;
 		console.log(req.body);
 		//validation
 		if (!email || !password)
@@ -293,19 +311,38 @@ const userController = {
 					return res.status(404).json({
 						msg: "Either the user name or password your entered is incorrect",
 					});
-				//token geneate
-				const token = jwt.sign(
-					{ id: results[0].user_id, email: email },
-					process.env.JWT_SECRET,
-					{ expiresIn: "30m" }
-				);
-				return res.json({
-					token,
-					user: {
-						id: results[0].user_id,
-						email: email,
-					},
-					msg: "login sucessfully",
+				//get user Role
+				userService.getUserRole(user_id, (err, results9) => {
+					if (err) {
+						console.log(err);
+						res.status(500).json({ msg: "database connection err" });
+					}
+					userRole = results9[0]["org_role_name"];
+
+					//token geneate
+					const token = jwt.sign(
+						{ id: results[0].user_id, email: email },
+						process.env.JWT_SECRET,
+						{ expiresIn: "30m" }
+					);
+					console.log({
+						token,
+						user: {
+							id: results[0].user_id,
+							email: email,
+							userRole: userRole,
+						},
+						msg: "login sucessfully",
+					});
+					return res.json({
+						token,
+						user: {
+							id: results[0].user_id,
+							email: email,
+							userRole: userRole,
+						},
+						msg: "login sucessfully",
+					});
 				});
 			});
 
@@ -400,21 +437,6 @@ const userController = {
 	},
 
 	// asign role
-	updateUserRole: (req, res) => {
-		console.log(req.body);
-		const { user_id, org_role_id } = req.body;
-		// console.log(req.body);
-		userService.updateRole(req.body, (err, results) => {
-			if (err) {
-				console.log(err);
-				return res.status(500).json({ msg: "database connection err" });
-			}
-			console.log(results);
-			return res
-				.status(200)
-				.json({ status: "sucess", msg: "role updated sucessfully" });
-		});
-	},
 
 	// add new electric meter
 	addElectricMeter: (req, res) => {
@@ -520,8 +542,53 @@ const userController = {
 		});
 	},
 
-	//creating role
+	//userprofile from userinfo
+	getUserProfile: (req, res) => {
+		const user_id = req.params.user_id;
+		userService.getUserProf(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "database connection err" });
+			}
+			return res.status(200).json({ results });
+		});
+	},
 
+	//updating role
+	updateUserRole: (req, res) => {
+		const user_id = req.params.id; // Assuming you have a JWT-based authentication middleware
+		const { newRole } = req.body;
+
+		// Check if the user has the necessary permissions to perform this action (e.g., based on their current role or additional authentication checks).
+
+		userService.updateUserRole(user_id, newRole, (err) => {
+			if (err) {
+				console.log(err);
+				res.status(500).json({ msg: "Database connection error" });
+			} else {
+				res.status(200).json({ msg: `User role updated to ${newRole}` });
+			}
+			console.log(`Role is updated to ${newRole}`);
+		});
+	},
+
+	//updatetwo
+	updateByAdmin: (req, res) => {
+		const user_id = req.params.id;
+		const { userRole } = req.body;
+		let updateGoods = `UPDATE org_role SET org_role_name='${userRole}' WHERE org_role_id=${user_id}`;
+		connection.query(updateGoods, (err) => {
+			if (err) {
+				// console.log(err)
+			} else {
+				res.send({
+					successMessage: "Goods updated successfully",
+					redirect: "/admin",
+					message: "Click Here Go Back To Admin Page",
+				});
+			}
+		});
+	},
 	// deleteUser: (req, res) => {
 	//    const user_id = req.params.id;
 	//   userService.deleteUserAddress(user_id, (err, results) => {

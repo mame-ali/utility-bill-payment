@@ -108,3 +108,8 @@ users_password,users_profile,users_role;
 
 INSERT INTO org_role (org_role_name)
 VALUES ('normal'),('reader'),('admin');
+
+SELECT org_role_name
+FROM org_role
+JOIN users_role ON org_role.org_role_id = users_role.org_role_id
+WHERE users_role.user_id = 1;

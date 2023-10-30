@@ -3,17 +3,13 @@ import query from "../../query/query.js";
 
 const paymentService = {
 	//add payment bill
+
 	addPaymentBill: (data, callback) => {
 		const insertPaymentBill = query.insertPaymentBill;
 		console.log(data);
 		connection.query(
 			insertPaymentBill,
-			[
-				data.user_id,
-				data.payment_reference,
-				data.payment_amount,
-				data.payment_status,
-			],
+			[data.payment_reference, data.payment_amount, data.payment_status],
 
 			(error, result, fields) => {
 				if (error) {

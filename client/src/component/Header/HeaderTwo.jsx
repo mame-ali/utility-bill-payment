@@ -1,215 +1,282 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+// import logo from "../../assets/images/logo.png";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import PersonIcon from "@mui/icons-material/Person";
+import "./Header.css";
+import iconbar from "../../assets/template_assets/images/icons/icon-bar.png";
+import logo1 from "../../assets/icons//new.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import { Link } from "react-router-dom";
+import HeaderTop from "./HeaderTop";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+// import PersonIcon from "@mui/icons-material/Person";
+function HeaderTwo(props) {
+	const [userData, setUserData] = useContext(UserContext);
 
-export default function HeaderTwo() {
+	const navigate = useNavigate();
+	useEffect(async () => {
+		console.log(userData.user["id"]);
+		let id = userData.user["id"];
+		// const response  = await axios.get(`/getuserRole/:${id}`);
+		// console.log(response);
+	}, []);
+	const handlelogout = () => {
+		setUserData((userData.token = null));
+		navigate("/login");
+		console.log(userData.token);
+	};
 	return (
 		<div>
-			<div className="header-top">
-				<div className="auto-container">
-					<div className="inner-container">
-						<div className="left-column">
-							<div className="text">
-								# 1 Multibrand Car Workshop of Losangle City
-							</div>
-							<div className="office-hour">
-								Monday - Saturday 7:00AM - 6:00PM
-							</div>
-						</div>
-						<div className="right-column">
-							<div className="phone-number">
-								Schedule Your Appointment Today: <strong>1800 456 7890</strong>
-							</div>
-							<div className="language-switcher">
-								<div id="polyglotLanguageSwitcher" className="">
-									<form action="#">
-										<select id="polyglot-language-options">
-											<option id="en" value="en" selected>
-												English
-											</option>
-											<option id="fr" value="fr">
-												French
-											</option>
-											<option id="de" value="de">
-												German
-											</option>
-											<option id="it" value="it">
-												Italian
-											</option>
-											<option id="es" value="es">
-												Spanish
-											</option>
-										</select>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="header-upper">
-				<div className="auto-container">
-					<div className="inner-container">
-						<div className="logo-box">
-							<div className="logo">
-								<a href="index.html">
-									<img src="assets/images/logo.png" alt="" />
-								</a>
-							</div>
-						</div>
-						<div className="right-column">
-							<div className="nav-outer">
-								<div className="mobile-nav-toggler">
-									<img src="assets/images/icons/icon-bar.png" alt="" />
-								</div>
-								<nav className="main-menu navbar-expand-md navbar-light">
-									<div
-										className="collapse navbar-collapse show clearfix"
-										id="navbarSupportedContent"
-									>
-										<ul className="navigation">
-											<li className="dropdown">
-												<a href="index.html">Home</a>
-												<ul>
-													<li>
-														<a href="index.html">Home Page 1</a>
-													</li>
-													<li>
-														<a href="index-2.html">Home Page 2</a>
-													</li>
-													<li>
-														<a href="index-3.html">Home Page 3</a>
-													</li>
-												</ul>
-											</li>
-											<li className="dropdown">
-												<a href="about.html">About Us</a>
-												<ul>
-													<li>
-														<a href="about.html">About Us</a>
-													</li>
-													<li>
-														<a href="history.html">Company History</a>
-													</li>
-													<li>
-														<a href="team.html">Our Team</a>
-													</li>
-												</ul>
-											</li>
-											<li className="dropdown">
-												<a href="service-1.html">Services</a>
-												<ul>
-													<li>
-														<a href="service-1.html">Services 1</a>
-													</li>
-													<li>
-														<a href="service-2.html">Services 2</a>
-													</li>
-													<li>
-														<a href="service-details.html">Single Service</a>
-													</li>
-												</ul>
-											</li>
-											<li className="dropdown">
-												<a href="gallery-1.html">Gallery</a>
-												<ul>
-													<li>
-														<a href="gallery-1.html">Gallery 1</a>
-													</li>
-													<li>
-														<a href="gallery-2.html">Gallery 2</a>
-													</li>
-												</ul>
-											</li>
-											<li className="dropdown">
-												<a href="blog.html">Pages</a>
-												<ul>
-													<li>
-														<a href="projects.html">Projects</a>
-													</li>
-													<li>
-														<a href="project-details.html">Project Details</a>
-													</li>
-													<li>
-														<a href="testimonials.html">Testimonials</a>
-													</li>
-													<li>
-														<a href="faq.html">Faq</a>
-													</li>
-													<li>
-														<a href="error.html">404 Error Page</a>
-													</li>
-													<li>
-														<a href="comming-soon.html">Coming Soon Page</a>
-													</li>
-												</ul>
-											</li>
-											<li className="dropdown">
-												<a href="#">News</a>
-												<ul>
-													<li>
-														<a href="blog.html">Blog With Side bar</a>
-													</li>
-													<li>
-														<a href="blog-2.html">Blog 2 Column</a>
-													</li>
-													<li>
-														<a href="blog-details.html">Blog Details</a>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<a href="contact.html">Contact Us</a>
-											</li>
-										</ul>
-									</div>
-								</nav>
-							</div>
-							<div className="search-btn">
-								<button type="button" className="theme-btn search-toggler">
-									<span className="stroke-gap-icon icon-Search"></span>
-								</button>
-							</div>
-							<div className="link-btn">
-								<a href="#" className="theme-btn btn-style-one">
-									Book a Schedule
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="sticky-header">
+			<header className="main-header header-style-one">
+				<HeaderTop />
 				<div className="header-upper">
 					<div className="auto-container">
 						<div className="inner-container">
 							<div className="logo-box">
 								<div className="logo">
-									<a href="index.html">
-										<img src="assets/images/logo.png" alt="" />
-									</a>
+									<Link to="/">
+										<img src={logo1} alt="" />
+									</Link>
 								</div>
 							</div>
 							<div className="right-column">
 								<div className="nav-outer">
 									<div className="mobile-nav-toggler">
-										<img src="assets/images/icons/icon-bar.png" alt="" />
+										<img src={iconbar} alt="icon-bar" />
 									</div>
-									<nav className="main-menu navbar-expand-md navbar-light"></nav>
+									<nav className="main-menu navbar-expand-md navbar-light">
+										<div
+											className="collapse navbar-collapse show clearfix"
+											id="navbarSupportedContent"
+										>
+											<ul className="navigation">
+												<li className="dropdown">
+													<Link to="/" style={{ textDecoration: "none" }}>
+														Home
+													</Link>
+												</li>
+												{!userData.user && (
+													<li className="dropdown">
+														<Link
+															to="/about"
+															style={{ textDecoration: "none" }}
+														>
+															About Us
+														</Link>
+
+														<ul>
+															<li>
+																<Link
+																	to="/about"
+																	style={{ textDecoration: "none" }}
+																>
+																	About Us
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="/history"
+																	style={{ textDecoration: "none" }}
+																>
+																	Company History
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="/team"
+																	style={{ textDecoration: "none" }}
+																>
+																	Our Team
+																</Link>
+															</li>
+														</ul>
+													</li>
+												)}
+												{!userData.user && (
+													<li className="dropdown">
+														<Link
+															to="/services"
+															style={{ textDecoration: "none" }}
+														>
+															Services
+														</Link>
+
+														<ul>
+															<li>
+																<Link
+																	to="/prepaid"
+																	style={{ textDecoration: "none" }}
+																>
+																	{" "}
+																	Prepaid
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="postpaid"
+																	style={{ textDecoration: "none" }}
+																>
+																	{" "}
+																	Postpaid
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="billinfo"
+																	style={{ textDecoration: "none" }}
+																>
+																	{" "}
+																	Bill Information
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="/paymentoption"
+																	style={{ textDecoration: "none" }}
+																>
+																	{" "}
+																	Payment Options
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="/getelectricity"
+																	style={{ textDecoration: "none" }}
+																>
+																	{" "}
+																	Getting Electricity
+																</Link>
+															</li>
+															<li>
+																<Link
+																	to="/customerservice"
+																	style={{ textDecoration: "none" }}
+																>
+																	{" "}
+																	Customer Service Center
+																</Link>
+															</li>
+														</ul>
+													</li>
+												)}
+												{!userData.user && (
+													<li>
+														<Link
+															to="/contact"
+															style={{ textDecoration: "none" }}
+														>
+															Contact Us
+														</Link>
+													</li>
+												)}
+												{userData.user && (
+													<li>
+														<Link to="/news" style={{ textDecoration: "none" }}>
+															Notification
+														</Link>
+													</li>
+												)}
+												{userData.user && (
+													<li>
+														<Link
+															to="/bills"
+															style={{ textDecoration: "none" }}
+														>
+															Bill
+														</Link>
+													</li>
+												)}
+												{userData.user && (
+													<li>
+														<Link
+															to="/electricmeter"
+															style={{ textDecoration: "none" }}
+														>
+															Electric meter
+														</Link>
+													</li>
+												)}
+												{userData.user && (
+													<li>
+														<Link to="/read" style={{ textDecoration: "none" }}>
+															Read
+														</Link>
+													</li>
+												)}
+												{userData.user && userData.user.userRole == "admin" && (
+													<li>
+														<Link
+															to="/users"
+															style={{ textDecoration: "none" }}
+														>
+															Users
+														</Link>
+													</li>
+												)}
+												{userData.user && userData.user.userRole == "admin" && (
+													<li>
+														<Link
+															to="/manageuser"
+															style={{ textDecoration: "none" }}
+														>
+															Assign Role
+														</Link>
+													</li>
+												)}
+											</ul>
+										</div>
+									</nav>
 								</div>
-								<div className="search-btn">
-									<button type="button" className="theme-btn search-toggler">
-										<span className="stroke-gap-icon icon-Search"></span>
-									</button>
-								</div>
-								<div className="link-btn">
-									<a href="#" className="theme-btn btn-style-one">
-										Book a Schedule
-									</a>
+								<div className="search-btn"></div>
+								<div class="link-btn">
+									{!userData.user && (
+										<Link
+											to="/login"
+											className="theme-btn btn-style-one"
+											style={{ textDecoration: "none" }}
+										>
+											Login
+										</Link>
+									)}
+									{userData.user && (
+										<div className="">
+											<NavDropdown
+												title={<PersonIcon />}
+												id="navbarScrollingDropdown"
+												className="pe-5"
+											>
+												<NavDropdown.Item as={Link} to="/profile">
+													Profile
+												</NavDropdown.Item>
+												<NavDropdown.Item as={Link} to="/settings">
+													Settings
+												</NavDropdown.Item>
+												<NavDropdown.Divider />
+												<NavDropdown.Item
+													as={Link}
+													to="/logout"
+													onClick={handlelogout}
+												>
+													Logout
+												</NavDropdown.Item>
+											</NavDropdown>
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</header>
 		</div>
 	);
 }
+
+export default HeaderTwo;

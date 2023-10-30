@@ -141,7 +141,16 @@ const userService = {
 			return callback(null, result);
 		});
 	},
-
+	//get user Role
+	getUserRole: (data, callback) => {
+		const getUserRoleQuery = query.getUserRole;
+		connection.query(getUserRoleQuery, [data], (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
 	//InsertBill
 	InsertBill: (data, callback) => {
 		const insertBill = query.insertBill;
@@ -173,9 +182,6 @@ const userService = {
 
 	// add user role
 	addUserrole: (data, callback) => {
-		// console.log("------------------------------");
-		// console.log(data)
-		//  console.log("------------------------------");
 		const insertIntoUsersrole = query.insertIntoUsersrole;
 		connection.query(
 			insertIntoUsersrole,
@@ -287,19 +293,7 @@ const userService = {
 	},
 
 	// update role
-	updateRole: (data, callback) => {
-		const updateUserRole = query.updateUserRole;
-		connection.query(
-			updateUserRole,
-			[data.org_role_id, data.user_id],
-			(error, result, fields) => {
-				if (error) {
-					return callback(error);
-				}
-				return callback(null, result);
-			}
-		);
-	},
+
 	// add new electric meter
 	addElectricMeter: (data, callback) => {
 		const insertElectricMeter = query.insertElectricMeter;
@@ -398,6 +392,27 @@ const userService = {
 				return callback(error);
 			}
 			return callback(null, result);
+		});
+	},
+
+	getUserProf: (data, callback) => {
+		const getUserprofile = query.getUserprofile;
+
+		connection.query(getUserprofile, [data], (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+
+	updateUserRole: (userId, role, callback) => {
+		const updateuserRoleQuery = query.updateuserRoleQuery;
+		connection.query(updateuserRoleQuery, [role, userId], (err, result) => {
+			if (err) {
+				return callback(err);
+			}
+			return callback(null);
 		});
 	},
 };

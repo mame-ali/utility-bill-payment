@@ -1,0 +1,26 @@
+.update-role-container {
+	margin-bottom: 100px;
+}
+
+.update-role-input {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-bottom: 10px;
+}
+
+.update-role-select {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
+.update-role-button {
+	padding: 10px 20px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}

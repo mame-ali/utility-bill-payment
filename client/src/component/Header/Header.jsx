@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // import logo from "../../assets/images/logo.png";
 import "./Header.css";
 import iconbar from "../../assets/template_assets/images/icons/icon-bar.png";
@@ -12,8 +12,14 @@ import { UserContext } from "../../context/UserContext";
 // import PersonIcon from "@mui/icons-material/Person";
 function Header(props) {
 	const [userData, setUserData] = useContext(UserContext);
-	const navigate = useNavigate();
 
+	const navigate = useNavigate();
+	useEffect(async () => {
+		console.log(userData.user["id"]);
+		let id = userData.user["id"];
+		// const response  = await axios.get(`/getuserRole/:${id}`);
+		// console.log(response);
+	}, []);
 	const handlelogout = () => {
 		setUserData((userData.token = null));
 		navigate("/login");
@@ -157,36 +163,14 @@ function Header(props) {
 									</nav>
 								</div>
 								<div className="search-btn"></div>
-								<div className="link-btn">
-									<div className="pe-5">
-										{userData.user && (
-											<NavDropdown
-												title={<PersonIcon />}
-												id="navbarScrollingDropdown"
-												className="pe-5"
-											>
-												<NavDropdown.Item as={Link} to="/profile">
-													Profile
-												</NavDropdown.Item>
-												<NavDropdown.Item as={Link} to="/settings">
-													Settings
-												</NavDropdown.Item>
-												<NavDropdown.Divider />
-												<NavDropdown.Item
-													as={Link}
-													to="/logout"
-													onClick={handlelogout}
-												>
-													Logout
-												</NavDropdown.Item>
-											</NavDropdown>
-										)}
-										{!userData.user && (
-											<Link to="/login" className="nav-link">
-												Login
-											</Link>
-										)}
-									</div>
+								<div class="link-btn">
+									<a
+										href="/login"
+										class="theme-btn btn-style-one"
+										style={{ textDecoration: "none" }}
+									>
+										Login
+									</a>
 								</div>
 							</div>
 						</div>

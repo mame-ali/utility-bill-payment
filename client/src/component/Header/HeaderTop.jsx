@@ -34,7 +34,7 @@ function HeaderTop() {
 									<li data-v-61a126ab="">
 										<a
 											target="_blank"
-											href="https://www.facebook.com/EEUOfficial"
+											href="https://www.facebook.com/oict.solutions/"
 											class="nav-link social-media-btn facebook"
 											data-v-61a126ab=""
 										>
@@ -44,7 +44,7 @@ function HeaderTop() {
 									<li data-v-61a126ab="">
 										<a
 											target="_blank"
-											href="https://twitter.com/EEUEthiopia"
+											href="https://twitter.com/oict_solutions"
 											class="nav-link social-media-btn twitter"
 											data-v-61a126ab=""
 										>
@@ -54,7 +54,7 @@ function HeaderTop() {
 									<li data-v-61a126ab="">
 										<a
 											target="_blank"
-											href="https://t.me/eeuethiopia"
+											href="https://t.me/abdisabancha"
 											class="nav-link social-media-btn telegram"
 											data-v-61a126ab=""
 										>
@@ -67,7 +67,7 @@ function HeaderTop() {
 									<li data-v-61a126ab="">
 										<a
 											target="_blank"
-											href="https://www.youtube.com/channel/UCV96qeHN0lvva6JcNJ0g-LQ"
+											href="https://youtu.be/ygfaE_3ICBo?si=Pengl7ZgWyN-mx8l"
 											class="nav-link social-media-btn youtube"
 											data-v-61a126ab=""
 										>
@@ -79,7 +79,7 @@ function HeaderTop() {
 										<a
 											class="nav-link"
 											type="button"
-											href="http://www.ethiopianelectricutility.gov.et/faq"
+											href="/faq"
 											data-v-61a126ab=""
 										>
 											FAQ

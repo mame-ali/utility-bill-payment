@@ -15,9 +15,9 @@ const Electric = () => {
 	return (
 		<div className="electric">
 			<div className="info centercontent">
-				<h1>Electric</h1>
+				<h1>Electric Meter</h1>
 				<Link to="/addelectricmeter" className="btn btn-primary">
-					Add New User
+					Add Electric Meter
 				</Link>
 			</div>
 			<DataTable first="users/electricmeters" />
