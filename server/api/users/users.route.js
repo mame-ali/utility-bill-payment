@@ -12,14 +12,17 @@ usersRouter.post("/insertreaddata", userController.insertReadData);
 usersRouter.get("/electricmeters", userController.AllElectricMeters);
 usersRouter.get("/meterread", userController.AllMetersRead);
 // usersRouter.get('//users/:id', userController.deleteUser);
+
 usersRouter.get("/bills/:user_id", userController.getUserBill);
+usersRouter.get("/bills", userController.getAllUsersBill);
+
 usersRouter.post("/createuser", userController.createUser);
 usersRouter.post("/confirmotp", userController.confirmOtp);
 usersRouter.post("/login", userController.login);
 usersRouter.post("/forgetpassword", userController.forgetPassword);
 usersRouter.post("/changePassword", userController.changePassword);
 usersRouter.get("/", auth, userController.getUserById);
-usersRouter.put("/assignrole", userController.updateUserRole);
+usersRouter.post("/assignrole", userController.updateUserRole);
 usersRouter.post("/addelectricmeter", userController.addElectricMeter);
 usersRouter.put("/updateElectricMeter", userController.updateElectricMeter);
 usersRouter.put(
@@ -35,6 +38,8 @@ usersRouter.get("/users/:user_id", userController.getUserProfile);
 usersRouter.put("/updateUserRole/:user_id", userController.updateUserRole);
 
 usersRouter.put("/updateByAdmin/:user_id", userController.updateByAdmin);
+// usersRouter.put("/deleteuser", userController.deleteUser);
+usersRouter.delete("/deleteuser/:id", userController.deleteUser);
 
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)

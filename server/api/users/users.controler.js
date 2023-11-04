@@ -112,6 +112,7 @@ const userController = {
 		});
 	},
 	insertReadData: (req, res) => {
+		console.log(req.body);
 		userService.getAllusersbyAccount(
 			req.body.account_number,
 			(err, results) => {
@@ -345,9 +346,10 @@ const userController = {
 					});
 				});
 			});
-
-			// console.log(isMatch )
 		});
+
+		// console.log(isMatch )
+		// });
 	},
 
 	// forget password
@@ -541,6 +543,16 @@ const userController = {
 			return res.status(200).json({ results });
 		});
 	},
+	getAllUsersBill: (req, res) => {
+		userService.getAllUsersBill((err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "database connection err" });
+			}
+			console.log(results);
+			return res.status(200).json({ results });
+		});
+	},
 
 	//userprofile from userinfo
 	getUserProfile: (req, res) => {
@@ -556,19 +568,28 @@ const userController = {
 
 	//updating role
 	updateUserRole: (req, res) => {
-		const user_id = req.params.id; // Assuming you have a JWT-based authentication middleware
-		const { newRole } = req.body;
+		console.log(req.body);
+		//const user_id = req.params.id; // Assuming you have a JWT-based authentication middleware
+		const { newRole, user_id } = req.body;
 
 		// Check if the user has the necessary permissions to perform this action (e.g., based on their current role or additional authentication checks).
-
-		userService.updateUserRole(user_id, newRole, (err) => {
+		userService.getCompanyRole(newRole, (err, results) => {
 			if (err) {
 				console.log(err);
 				res.status(500).json({ msg: "Database connection error" });
 			} else {
-				res.status(200).json({ msg: `User role updated to ${newRole}` });
+				// console.log(results);
+				const org_role_id = results[0].org_role_id;
+				userService.updateUserRole(user_id, org_role_id, (err) => {
+					if (err) {
+						console.log(err);
+						res.status(500).json({ msg: "Database connection error" });
+					} else {
+						res.status(200).json({ msg: `User role updated to ${newRole}` });
+					}
+					console.log(`Role is updated to ${newRole}`);
+				});
 			}
-			console.log(`Role is updated to ${newRole}`);
 		});
 	},
 
@@ -589,23 +610,51 @@ const userController = {
 			}
 		});
 	},
+	//delete user
+	deleteUser: (req, res) => {
+		const user_id = req.params.id;
+		userService.deleteUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "database connection err" });
+			}
+			userService.deleteUserInfo(user_id, (err, results) => {
+				if (err) {
+					console.log(err);
+					return res.status(500).json({ msg: "database connection err" });
+				}
+			});
+			userService.deleteUserRole(user_id, (err, results) => {
+				if (err) {
+					console.log(err);
+					return res.status(500).json({ msg: "database connection err" });
+				}
+			});
+		});
+		// console.log("betam arif");
+		return res
+			.status(200)
+			.json({ status: "sucess", msg: "user deleted sucessfully" });
+	},
 	// deleteUser: (req, res) => {
-	//    const user_id = req.params.id;
-	//   userService.deleteUserAddress(user_id, (err, results) => {
-	//     if (err) {
-	//       console.log(err);
-	//       return res.status(500).json({ msg: "database connection err" });
-	//     }
-	//     userService.deleteElectricMeter(user_id, (err, results) => {
-	//       if (err) {
-	//         console.log(err);
-	//         return res.status(500).json({ msg: "database connection err" });
-	//       }
-	//     })
-	//   });
-	//    return res.status(200).json({ status: "sucess",msg:"electric meter deleted sucessfully" });
+	// 	const user_id = req.params.id;
 
-	// }
+	// 	// Use Promises or async/await for better error handling
+	// 	Promise.all([
+	// 		userService.deleteUser(user_id),
+	// 		userService.deleteUserInfo(user_id),
+	// 		userService.deleteUserRole(user_id),
+	// 	])
+	// 		.then(() => {
+	// 			return res
+	// 				.status(200)
+	// 				.json({ status: "success", msg: "User deleted successfully" });
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error(err);
+	// 			return res.status(500).json({ msg: "Database connection error" });
+	// 		});
+	// },
 };
 
 export default userController;
@@ -629,8 +678,8 @@ const sendEmail = async (user_email, v_code) => {
 		const mailOptions = {
 			from: process.env.EMAIL,
 			to: user_email,
-			subject: "text",
-			text: `your evangadi verification code is ${v_code}`,
+			subject: "Email Confirmation",
+			text: `Your Utility Bill verification code is ${v_code}`,
 		};
 
 		await transporter.sendMail(mailOptions);

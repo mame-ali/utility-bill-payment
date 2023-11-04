@@ -24,7 +24,7 @@ function Home() {
 					<div className="video-box">
 						<div className="video-btn">
 							<a
-								href="https://www.youtube.com/watch?v=nfP5N9Yc72A&t=28s"
+								href="https://youtu.be/ygfaE_3ICBo?si=Pengl7ZgWyN-mx8l"
 								className="overlay-link lightbox-image video-fancybox ripple"
 							>
 								<i className="flaticon-play"></i>

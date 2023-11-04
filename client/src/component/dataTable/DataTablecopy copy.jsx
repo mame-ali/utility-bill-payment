@@ -1,23 +1,26 @@
+// In DataTableCopy.js
 import React, { useEffect, useState, useRef } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "../../utils/axios";
 import Show from "../add/Show";
 import { saveAs } from "file-saver";
 import { useReactToPrint } from "react-to-print";
-import { Edit, Delete, Visibility } from "@mui/icons-material";
-import { redirect, useNavigate } from "react-router-dom";
 
-export default function DataTable({ first, name }) {
+import { redirect, useNavigate } from "react-router-dom";
+// import "./DataTableCopy.css";
+
+export default function DataTableCopy({ first, name }) {
 	const [deleted, setDeleted] = useState(false);
 	const [reload, setReload] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [user, setUser] = useState([]);
+	const [bill, setBill] = useState([]);
 	const [filteredUser, setFilteredUser] = useState([]);
+	const [filteredBill, setFilteredBill] = useState([]);
 	const componentRef = useRef(null);
 	const [selectedRowData, setSelectedRowData] = useState(null); // State to hold the single-clicked row data
 	let [alertdata, setAlertdata] = useState({});
 	const navigate = useNavigate();
-
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -32,9 +35,7 @@ export default function DataTable({ first, name }) {
 				setSelectedRowData(params.row); // Set the selectedRowData state to the clicked row data
 				handleAddUserClick(); // Open the Show component
 			};
-			const onClickUpdate = () => {
-				handleUpdate(`${params.row.user_id}`);
-			};
+
 			const onClickDelete = () => {
 				handleDelete(`${params.row.user_id}`);
 			};
@@ -42,13 +43,10 @@ export default function DataTable({ first, name }) {
 			return (
 				<div className="cellAction d-block">
 					<div className="viewButton btn btn-secondary" onClick={onClickView}>
-						<Visibility /> {/* Replace "View" with an eye icon */}
-					</div>
-					<div className="updateButton btn btn-primary" onClick={onClickUpdate}>
-						<Edit /> {/* Replace "Update" with a pen icon */}
+						View
 					</div>
 					<div className="deleteButton btn btn-danger" onClick={onClickDelete}>
-						<Delete /> {/* Replace "Delete" with a trash icon */}
+						Delete
 					</div>
 				</div>
 			);
@@ -59,43 +57,22 @@ export default function DataTable({ first, name }) {
 		try {
 			const response = await axios.get(first);
 			console.log(response.data.results);
-			setUser(response.data.results);
-			setFilteredUser(response.data.results);
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	const handleUpdate = async (id) => {
+	const handleDelete = async (id) => {
 		const data = {
 			user_id: id,
 			org_role_id: 2,
 		};
 		const confirmed = window.confirm(
-			`Are you sure? \n you want to  update ${first}`
+			`Are you sure? \n you want to  Delete ${first}`
 		);
 		if (confirmed) {
 			const response = await axios.put("users/assignrole", data);
 			console.log(response);
-		} else {
-			alert("delete canceled");
-		}
-	};
-	const handleDelete = async (id) => {
-		const confirmed = window.confirm(
-			`Are you sure? \n you want to delete ${first}`
-		);
-		if (confirmed) {
-			const response = await axios
-				.delete(`users/deleteuser/${id}`)
-				.then((response) => {
-					alert(response.data);
-					setDeleted(true); // Set deleted to true to trigger a state update
-				})
-				.catch((error) => {
-					alert(error);
-					console.error(error);
-				});
 		} else {
 			alert("delete canceled");
 		}

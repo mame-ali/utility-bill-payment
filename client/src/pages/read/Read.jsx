@@ -3,7 +3,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import axios from "../../utils/axios";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
-// import "./read.css";
+import "./read.css";
 
 const Read = () => {
 	const [electricMeterId, setElectricMeterId] = useState("");

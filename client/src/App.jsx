@@ -8,7 +8,7 @@ import "./assets/template_assets/css/color.css";
 import "./App.css";
 // Import the custom css file
 import "./assets/styles/custom.css";
-import Header from "./component/Header/Header.jsx";
+// import Header from "./component/Header/Header.jsx";
 import Home from "./pages/home/Home";
 
 import Footer from "./component/footer/Footer";
@@ -35,10 +35,14 @@ import Users from "./pages/users/Users";
 import AddElectricMeter from "./pages/add/AddElectricMeter";
 import Electric from "./pages/electric/Electric";
 import Read from "./pages/read/Read";
+import Payment2 from "./pages/payment/Payment2";
+
 // import UpdateRole from "./pages/updateRole/UpdateRole";
 import Manageuser from "./pages/updateRole/ManageUser";
 import HeaderTwo from "./component/Header/HeaderTwo";
 import Faq from "./pages/faq/Faq";
+import Fo4 from "./component/fo4/Fo4";
+import Payment3 from "./pages/payment/Payment3";
 function App() {
 	return (
 		<>
@@ -76,6 +80,10 @@ function App() {
 				/>
 				<Route path="/read" element={<Read />} />
 				<Route path="/manageuser" element={<Manageuser />} />
+				<Route path="/payment" element={<Payment2 />} />
+				<Route path="/payment3" element={<Payment3 />} />
+
+				<Route path="/*" element={<Fo4 />} />
 				{/* <Route path="/electricmeter" element={<Electric />} />
 				<Route path="/users" element={<Users />} />
 				<Route path="/bills" element={<Bill />} />

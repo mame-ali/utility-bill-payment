@@ -129,7 +129,26 @@ const userService = {
 			return callback(null, result);
 		});
 	},
+	getUserBill: (data, callback) => {
+		const getBillInfo = query.getBillInfo;
 
+		connection.query(getBillInfo, [data], (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+
+	getAllUsersBill: (callback) => {
+		const getAllBill = query.getAllBill;
+		connection.query(getAllBill, (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
 	getPrevBillInfo: (data, callback) => {
 		console.log(`----------${data}`);
 		const getPrevElectricMeter = query.getPrevElectricMeter;
@@ -161,6 +180,11 @@ const userService = {
 				if (error) {
 					return callback(error);
 				}
+
+				console.log("******BILI");
+				console.log(result);
+				console.log("******BILI");
+
 				return callback(null, result);
 			}
 		);
@@ -406,13 +430,65 @@ const userService = {
 		});
 	},
 
-	updateUserRole: (userId, role, callback) => {
+	updateUserRole: (userId, org_role_id, callback) => {
 		const updateuserRoleQuery = query.updateuserRoleQuery;
-		connection.query(updateuserRoleQuery, [role, userId], (err, result) => {
+		connection.query(
+			updateuserRoleQuery,
+			[org_role_id, userId],
+			(err, result) => {
+				if (err) {
+					return callback(err);
+				}
+				return callback(null);
+			}
+		);
+	},
+	getCompanyRole: (newRole, callback) => {
+		const getCompanyRoleQuery = query.getCompanyRoleQuery;
+		connection.query(getCompanyRoleQuery, [newRole], (err, result) => {
 			if (err) {
 				return callback(err);
 			}
-			return callback(null);
+			return callback(null, result);
+		});
+	},
+	// delete user
+	// deleteUser: (data, callback) => {
+	// 	const deleteUser = query.deleteUser;
+	// 	connection.query(deleteUser, [data], (error, result, fields) => {
+	// 		if (error) {
+	// 			return callback(error);
+	// 		}
+	// 		return callback(null, result);
+	// 	});
+	// },
+
+	//I tried to delete user
+	deleteUser: (data, callback) => {
+		const deleteUser = query.deleteUser;
+		connection.query(deleteUser, [data], (error, result) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+	deleteUserInfo: (data, callback) => {
+		const deleteUserInfo = query.deleteUserinfo;
+		connection.query(deleteUserInfo, [data], (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+	deleteUserRole: (data, callback) => {
+		const deleteUserRole = query.deleteUserRole;
+		connection.query(deleteUserRole, [data], (error, result, fields) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
 		});
 	},
 };

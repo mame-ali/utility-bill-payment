@@ -1,3 +1,32 @@
-.read {
+.addElectric {
+	background-color: rgb(86, 164, 150);
+	padding: 10px;
+}
+
+.addElectric form {
+	margin-bottom: 15px;
+}
+
+.addElectric label {
 	color: white;
+	font-weight: bold;
+}
+
+.addElectric input[type="text"],
+.addElectric select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.addElectric button[type="submit"] {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+.addElectric button[type="submit"]:hover {
+	background-color: #45a049;
 }

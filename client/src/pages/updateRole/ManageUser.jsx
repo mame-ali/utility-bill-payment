@@ -6,8 +6,8 @@ import UpdateRole from "./UpdateRole";
 const Manageuser = () => {
 	const onUpdateRole = async (user_id, newRole) => {
 		try {
-			const response = await axios.put(`users/updateUserRole/${user_id}`, {
-				role: newRole,
+			const response = await axios.post(`/users/assignrole/${user_id}`, {
+				org_role: newRole,
 			});
 
 			if (response.status === 200) {
@@ -16,7 +16,7 @@ const Manageuser = () => {
 				console.error("Error updating user role");
 			}
 		} catch (error) {
-			console.error(error);
+			console.log(error);
 		}
 	};
 

@@ -6,7 +6,7 @@ const Users = () => {
 	const [open, setOpen] = useState(false);
 	return (
 		<div className="wrapper">
-			<h1>Electric</h1>
+			<h1>Users</h1>
 			<DataTable first="users/users" />
 			{open && <Add name="users" columns={columns} setOpen={setOpen} />}
 		</div>

@@ -28,10 +28,11 @@ function HeaderTwo(props) {
 		// console.log(response);
 	}, []);
 	const handlelogout = () => {
-		setUserData((userData.token = null));
+		setUserData({ ...userData, token: null }); // Update the token property
 		navigate("/login");
-		console.log(userData.token);
+		console.log(userData.token); // This may still log the old value due to closure, so it may not reflect the updated state immediately
 	};
+
 	return (
 		<div>
 			<header className="main-header header-style-one">
@@ -261,7 +262,7 @@ function HeaderTwo(props) {
 												<NavDropdown.Divider />
 												<NavDropdown.Item
 													as={Link}
-													to="/logout"
+													to="/"
 													onClick={handlelogout}
 												>
 													Logout

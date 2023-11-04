@@ -147,6 +147,9 @@ JOIN electric_meter_address ON electric_meter.electric_meter_id = electric_meter
                 JOIN electric_meter ON bills.electric_meter_id = electric_meter.electric_meter_id
                 JOIN users ON electric_meter.user_id = users.user_id
                 WHERE users.user_id = ?;`,
+
+	getAllBill: `SELECT * FROM bills`,
+
 	insertRole: `INSERT INTO org_role (org_role_name) VALUES ('normal'),('reader'),('admin');`,
 
 	getAccout: `select account_number from electric_meter`,
@@ -196,12 +199,26 @@ JOIN users_role ON org_role.org_role_id = users_role.org_role_id
 WHERE users_role.user_id = ?;
 `,
 	//update user role
-	updateuserRoleQuery:
-		"UPDATE org_role SET org_role_name = ? WHERE org_role_id = ?",
+	updateuserRoleQuery: "Update users_role SET org_role_id=? WHERE user_id =?",
 	//update userinfo
 	getUserProfile: `SELECT * FROM users_info WHERE user_id = ?;`,
 
 	updateUserProfile: `UPDATE users_info
 SET f_name = ?, m_name = ?, l_name = ?, phone = ?
 WHERE user_id = ?;`,
+	getCompanyRoleQuery: `SELECT * FROM org_role WHERE org_role_name=?`,
+	//delet user
+	Deleting: `DELETE up, ur, mr, ema, ui, upw, u
+FROM users_profile up
+LEFT JOIN users_role ur ON up.user_id = ur.user_id
+LEFT JOIN meter_read mr ON up.user_id = mr.user_id
+LEFT JOIN electric_meter ema ON up.user_id = ema.user_id
+LEFT JOIN users_info ui ON up.user_id = ui.user_id
+LEFT JOIN users_password upw ON up.user_id = upw.user_id
+LEFT JOIN users u ON up.user_id = u.user_id
+WHERE up.user_id = ?`,
+	deleteUserinfo: `DELETE FROM users_info WHERE user_id = ?`,
+	deleteUserRole: `DELETE FROM users_role WHERE user_id = ?`,
+	deleteUser: `DELETE FROM users WHERE user_id = ?`,
+	deleteUserPassword: `DELETE FROM users WHERE user_id = ?`,
 };

@@ -70,9 +70,11 @@ function HeadLogin() {
 							Users
 						</Link>
 					)}
-					<Link to="/manageuser" className="nav-link me-5">
-						Assign Role
-					</Link>
+					{userData.user && userData.user.userRole == "admin" && (
+						<Link to="/manageuser" className="nav-link me-5">
+							Assign Role
+						</Link>
+					)}
 					<div className="pe-5">
 						{userData.user && (
 							<NavDropdown

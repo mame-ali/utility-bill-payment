@@ -1,71 +1,66 @@
 import React from "react";
-import imag1 from "../../assets/images/banner/banner.jpg";
+import image1 from "../../assets/images/banner/banner.jpg";
 import { Link } from "react-router-dom";
-function About() {
+
+function ElectricityBillAbout() {
 	return (
 		<div>
-			<section
-				className="page-title"
-				// style={{background-image:"url(assets/images/background/bg-3.jpg)"}}
-			>
+			<div className="auto-container">
+				<h2>About our Electricity Bill Service</h2>
+				<ul className="page-breadcrumb">
+					<li>
+						<Link to="/">Home</Link>
+					</li>
+					<li>About our Electricity Bill Service</li>
+				</ul>
+			</div>
+			{/* <section className="page-title">
 				<div className="auto-container">
-					<h2>About us</h2>
+					<h2>About our Electricity Bill Service</h2>
 					<ul className="page-breadcrumb">
 						<li>
-							<Link to="/">home</Link>
+							<Link to="/">Home</Link>
 						</li>
-						<li>About us</li>
+						<li>About our Electricity Bill Service</li>
 					</ul>
 				</div>
-				{/* <h1 data-parallax='{"x": 200}'>Car Repairing</h1> */}
-			</section>
+			</section> */}
 			<section className="about-section-three">
 				<div className="auto-container">
 					<div className="row">
 						<div className="col-lg-7">
 							<div className="content">
 								<h2>
-									We are highly skilled mechanics <br /> for your car repair
+									We are dedicated to simplifying your electricity bill payment
 								</h2>
 								<div className="text">
 									<p>
-										Bring to the table win-win survival strategies to ensure
-										proactive domination. At the end of the day, going forward,
-										a new normal that has evolved from generation X is on the
-										runway heading towards a streamlined cloud solution. User
-										generated content in real-time will have multiple
-										touchpoints for offshoring.
+										Our mission is to provide you with a seamless experience for
+										paying your electricity bills. Say goodbye to long queues
+										and late payments.
 									</p>
 									<p>
-										Capitalize on low hanging fruit to identify a ballpark value
-										added activity to beta test. Override the digital divide
-										with additional clickthroughs from DevOps. Nanotechnology
-										immersion along the information heading towards a
-										streamlined cloud solution. User generated content in
-										real-time will have multiple.
+										We ensure the privacy and security of your payment
+										information. With our user-friendly platform, you can easily
+										view your bill details, check your usage history, and make
+										payments from the comfort of your own home.
 									</p>
 								</div>
 							</div>
 						</div>
 						<div className="col-lg-5">
 							<div className="image">
-								<img src={imag1} alt="" />
+								<img src={image1} alt="Electricity Bill Image" />
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			<section className="video-section">
-				<div
-					// data-parallax='{"y": 50}'
-					className="sec-bg"
-					// style="background-image: url(assets/images/background/bg-1.jpg);"
-				></div>
+				<div className="sec-bg"></div>
 				<div className="auto-container">
 					<h5>Working since 1992</h5>
-					<h2>
-						We are leader <br /> in Car Mechanical Work
-					</h2>
+					<h2>We are leaders in Electricity Bill Payment</h2>
 					<div className="video-box">
 						<div className="video-btn">
 							<a
@@ -85,4 +80,4 @@ function About() {
 	);
 }
 
-export default About;
+export default ElectricityBillAbout;

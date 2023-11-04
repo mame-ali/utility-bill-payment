@@ -1,6 +1,7 @@
 import React from "react";
 import image1 from "../../assets/images/for-about/light-bulb.jpg";
 import image2 from "../../assets/images/for-about/closeup-contact.jpg";
+
 function About() {
 	return (
 		<section className="about-section">
@@ -8,8 +9,8 @@ function About() {
 				<div className="row">
 					<div className="col-lg-5">
 						<div className="image-box">
-							<img src={image1} alt="" />
-							<img src={image2} alt="" />
+							<img src={image1} alt="Electricity Bill Image" />
+							<img src={image2} alt="Electricity Bill Image" />
 							<div className="year-experience" data-parallax='{"y": 30}'>
 								<strong>24</strong> years <br /> Experience
 							</div>
@@ -21,10 +22,10 @@ function About() {
 							<h2>Convenient and Secure Online Bill Payment</h2>
 							<div className="text">
 								<p>
-									Simplify your life with our hassle-free online bill payment
-									service. We bring you a seamless experience to pay your
-									electricity bills with just a few clicks. Say goodbye to long
-									queues and late payments.
+									Simplify your life with our hassle-free online electricity
+									bill payment service. We bring you a seamless experience to
+									pay your electricity bills with just a few clicks. Say goodbye
+									to long queues and late payments.
 								</p>
 								<p>
 									Our secure platform ensures the privacy and safety of your
@@ -34,10 +35,7 @@ function About() {
 								</p>
 							</div>
 							<div className="link-btn mt-40">
-								<a
-									href="about.html"
-									className="theme-btn btn-style-one style-two"
-								>
+								<a href="/about" className="theme-btn btn-style-one style-two">
 									<span>
 										About Us <i className="flaticon-right"></i>
 									</span>

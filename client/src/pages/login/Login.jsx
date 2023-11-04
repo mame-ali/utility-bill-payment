@@ -11,8 +11,10 @@ function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
-	const navigate = useNavigate();
 	const [userData, setUserData] = useContext(UserContext);
+	const [errorMessage, setErrorMessage] = useState(null); // Add errorMessage state
+	const navigate = useNavigate();
+
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
 	};
@@ -30,10 +32,13 @@ function Login() {
 	const handleLogin = async (e) => {
 		e.preventDefault();
 
+		// Reset any previous error messages
+		setErrorMessage(null);
+
 		// Validate email and password
 		if (!validateEmail(email)) {
 			// Handle invalid email format
-			alert("Invalid email format");
+			setErrorMessage("Invalid email format");
 			return;
 		}
 
@@ -44,11 +49,6 @@ function Login() {
 
 		try {
 			const response = await axios.post("/users/login", formData);
-			// console.log({
-			// 	token: response.data.token,
-			// 	user: response.data.user,
-			// });
-
 			alert(response.data.msg);
 			setUserData({
 				token: response.data.token,
@@ -56,7 +56,7 @@ function Login() {
 			});
 			navigate("/");
 		} catch (error) {
-			alert(error.response.data.msg);
+			setErrorMessage("Email or password is incorrect"); // Set error message for incorrect credentials
 			console.log(error);
 		}
 	};
@@ -68,7 +68,13 @@ function Login() {
 	return (
 		<div className="container">
 			<form className="form" onSubmit={handleLogin}>
-				<h2>Login</h2>
+				<h2>Login To Your Account</h2>
+				{errorMessage && (
+					<h5 className="error" style={{ color: "red" }}>
+						{errorMessage}
+					</h5>
+				)}{" "}
+				{/* Display error message in red */}
 				<div className="form-group">
 					<TextField
 						type="email"
@@ -81,7 +87,6 @@ function Login() {
 						fullWidth
 					/>
 				</div>
-
 				<div className="form-group">
 					<TextField
 						type={showPassword ? "text" : "password"}
@@ -104,7 +109,6 @@ function Login() {
 						}}
 					/>
 				</div>
-
 				<Button type="submit" variant="contained" color="primary" fullWidth>
 					Login
 				</Button>
