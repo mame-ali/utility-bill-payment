@@ -96,6 +96,17 @@ export default {
     REFERENCES electric_meter (electric_meter_id)
 );
 `,
+	transactionTableCreate: `CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    payment_status VARCHAR(20) NOT NULL,
+    payment_method VARCHAR(20) NOT NULL,
+    stripe_token VARCHAR(255) NOT NULL,  -- This column is used to store the Stripe token
+    created_at DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+  );`,
 
 	getUserByEmail: `select * from users WHERE USER_email=?;`,
 	getOTPByEmail: `select * from users WHERE USER_email=? and otp =?;`,
@@ -229,4 +240,8 @@ WHERE electric_meter_id IN (SELECT electric_meter_id FROM electric_meter WHERE u
 	deleteUserinfo: `DELETE FROM users_info WHERE user_id = ?`,
 	deleteUserRole: `DELETE FROM users_role WHERE user_id = ?`,
 	deleteUser: `DELETE FROM users WHERE user_id = ?`,
+	//transaction query
+	insertTransaction: `INSERT INTO transactions (user_id, amount, currency, payment_status, payment_method, created_at)
+  VALUES (?, ?, 'USD', ?, 'credit_card', NOW());
+  `,
 };

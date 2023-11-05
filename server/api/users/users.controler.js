@@ -5,6 +5,11 @@ import bcrypt from "bcryptjs";
 import { connection } from "../../config/db.js";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
+import stripePackage from "stripe";
+const stripe = new stripePackage(
+	"sk_test_51Nn1nKBEazAh7lNxKQmVrKFT3VDd7b8e22YXVDolv9ok0fbdrUzg8RmRbsMw4B1CVYRmvyoOKTL6rm8VBkai9WSv008qJE02oK"
+);
+
 //import { upload } from '../../config/multer.js';
 import dotenv from "dotenv";
 dotenv.config();
@@ -770,6 +775,40 @@ const userController = {
 			}
 			res.json({ msg: "User and related data deleted successfully" });
 		});
+	},
+	//InserTrasaction
+	//controller
+	//
+	insertTransaction: (req, res) => {
+		const { user_id, amount, payment_status } = req.body;
+
+		// Validate the request data if needed
+
+		// Create a payment intent using Stripe
+		stripe.paymentIntents
+			.create({
+				amount: amount, // Amount in cents (e.g., $10.00)
+				currency: "usd",
+				payment_method: "pm_card_visa", // Replace with the actual payment method ID or token
+			})
+			.then((paymentIntent) => {
+				// You can use the paymentIntent.client_secret in your frontend to confirm the payment
+				// Call the service to insert the transaction data into your database
+				userService.insertTransaction(
+					{ user_id, amount, payment_status },
+					(err, results) => {
+						if (err) {
+							console.error(err);
+							return res.status(500).json({ msg: "Database connection error" });
+						}
+						res.json({ msg: "Transaction inserted successfully" });
+					}
+				);
+			})
+			.catch((error) => {
+				console.error(error);
+				return res.status(500).json({ msg: "Stripe payment error" });
+			});
 	},
 };
 

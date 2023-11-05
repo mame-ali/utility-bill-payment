@@ -7,7 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import PersonIcon from "@mui/icons-material/Person";
-import "./Header.css";
+// import "./HeaderTwo.css";
 import iconbar from "../../assets/template_assets/images/icons/icon-bar.png";
 import logo1 from "../../assets/icons//new.png";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import HeaderTop from "./HeaderTop";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+// import HeaderTopNew from "./HeaderTopNew";
 // import PersonIcon from "@mui/icons-material/Person";
 function HeaderTwo(props) {
 	const [userData, setUserData] = useContext(UserContext);
@@ -37,6 +38,7 @@ function HeaderTwo(props) {
 		<div>
 			<header className="main-header header-style-one">
 				<HeaderTop />
+				{/* <HeaderTopNew /> */}
 				<div className="header-upper">
 					<div className="auto-container">
 						<div className="inner-container">

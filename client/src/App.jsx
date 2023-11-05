@@ -23,6 +23,7 @@ import Enterpassword from "./pages/forgetpassword/Enterpassword";
 import About from "./pages/about/About";
 import History from "./pages/history/History";
 // import HeadLogin from "./component/Header/HeadLogin";
+//headernew
 
 //services
 import Postpaid from "./pages/postpaid/Pospaid";
@@ -43,6 +44,7 @@ import HeaderTwo from "./component/Header/HeaderTwo";
 import Faq from "./pages/faq/Faq";
 import Fo4 from "./component/fo4/Fo4";
 import Payment3 from "./pages/payment/Payment3";
+import Transaction from "./pages/transaction/Transaction";
 function App() {
 	return (
 		<>
@@ -82,6 +84,7 @@ function App() {
 				<Route path="/manageuser" element={<Manageuser />} />
 				<Route path="/payment" element={<Payment2 />} />
 				<Route path="/payment3" element={<Payment3 />} />
+				<Route path="/transaction" element={<Transaction />} />
 
 				<Route path="/*" element={<Fo4 />} />
 				{/* <Route path="/electricmeter" element={<Electric />} />

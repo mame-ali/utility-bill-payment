@@ -43,6 +43,9 @@ usersRouter.put("/updateByAdmin/:user_id", userController.updateByAdmin);
 //delete user nw
 // usersRouter.delete("/deleteUser/:id", userController.deleteUsersByUser);
 usersRouter.delete("/deleteuser/:id", userController.deleteUserAndRelatedData);
+//transaction
+
+usersRouter.post("/insertTransaction", userController.insertTransaction);
 
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)

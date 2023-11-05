@@ -644,33 +644,43 @@ const userService = {
 			});
 		});
 	},
-	// deleteUser: (data, callback) => {
-	// 	const deleteUser = query.deleteUser;
-	// 	connection.query(deleteUser, [data], (error, result) => {
-	// 		if (error) {
-	// 			return callback(error);
+	//insertTrasaction
+	//service
+	// insertTransaction: (data, callback) => {
+	// 	const insertTransaction = query.insertTransaction;
+	// 	// In the service
+	// 	console.log("SQL query:", insertTransaction);
+
+	// 	// Execute the SQL query
+	// 	// In the service
+	// 	connection.query(
+	// 		insertTransaction,
+	// 		[data.user_id, data.amount, data.payment_status],
+	// 		(error, results) => {
+	// 			if (error) {
+	// 				console.error("MySQL error:", error);
+	// 				return callback(error);
+	// 			}
+	// 			return callback(null, results);
 	// 		}
-	// 		return callback(null, result);
-	// 	});
+	// 	);
 	// },
-	// deleteUserInfo: (data, callback) => {
-	// 	const deleteUserInfo = query.deleteUserinfo;
-	// 	connection.query(deleteUserInfo, [data], (error, result, fields) => {
-	// 		if (error) {
-	// 			return callback(error);
-	// 		}
-	// 		return callback(null, result);
-	// 	});
-	// },
-	// deleteUserRole: (data, callback) => {
-	// 	const deleteUserRole = query.deleteUserRole;
-	// 	connection.query(deleteUserRole, [data], (error, result, fields) => {
-	// 		if (error) {
-	// 			return callback(error);
-	// 		}
-	// 		return callback(null, result);
-	// 	});
-	// },
+	// Service
+	insertTransaction: (data, callback) => {
+		const insertTransaction = query.insertTransaction;
+		// Execute the SQL query
+		connection.query(
+			insertTransaction,
+			[data.user_id, data.amount, data.payment_status],
+			(error, results) => {
+				if (error) {
+					console.error("MySQL error:", error);
+					return callback(error);
+				}
+				return callback(null, results);
+			}
+		);
+	},
 };
 
 export default userService;

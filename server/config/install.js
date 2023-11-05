@@ -59,3 +59,7 @@ connection.query(query.paymentTableCreate, (error, results, fields) => {
 	if (error) console.log(error);
 	console.log("paymentTbaleCreate");
 });
+connection.query(query.transactionTableCreate, (error, results, fields) => {
+	if (error) console.log(error);
+	console.log("transactionTableCreate");
+});
