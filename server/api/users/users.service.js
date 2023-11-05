@@ -464,33 +464,213 @@ const userService = {
 	// },
 
 	//I tried to delete user
-	deleteUser: (data, callback) => {
-		const deleteUser = query.deleteUser;
-		connection.query(deleteUser, [data], (error, result) => {
+
+	deleteBillsByUserId: (user_id, callback) => {
+		// Subquery to get electric_meter_id based on user_id
+		const subquery = `SELECT electric_meter_id FROM electric_meter WHERE user_id = ?`;
+
+		// Main DELETE query using the subquery
+		const deleteBillsQuery = `DELETE FROM bills WHERE electric_meter_id IN (${subquery})`;
+
+		connection.query(
+			deleteBillsQuery,
+			[user_id, user_id],
+			(error, result, fields) => {
+				if (error) {
+					return callback(error);
+				}
+				return callback(null, result);
+			}
+		);
+	},
+	deleteUserMeterRead: (user_id, callback) => {
+		const deleteUserMeterReadQuery = "DELETE FROM meter_read WHERE user_id = ?";
+
+		connection.query(
+			deleteUserMeterReadQuery,
+			[user_id],
+			(error, result, fields) => {
+				if (error) {
+					return callback(error);
+				}
+				return callback(null, result);
+			}
+		);
+	},
+	//delete electric meter address by userid
+	deleteElectricMeterAddressByUser: (user_id, callback) => {
+		const query = `
+		  DELETE FROM electric_meter_address
+		  WHERE electric_meter_id IN (
+			SELECT electric_meter_id
+			FROM electric_meter
+			WHERE user_id = ?
+		  );
+		`;
+
+		connection.query(query, [user_id], (error, result, fields) => {
 			if (error) {
 				return callback(error);
 			}
 			return callback(null, result);
 		});
 	},
-	deleteUserInfo: (data, callback) => {
-		const deleteUserInfo = query.deleteUserinfo;
-		connection.query(deleteUserInfo, [data], (error, result, fields) => {
+	//delete electric meter
+	deleteElectricMeterByUser: (user_id, callback) => {
+		const deleteQuery = "DELETE FROM electric_meter WHERE user_id = ?";
+
+		connection.query(deleteQuery, [user_id], (error, result) => {
 			if (error) {
 				return callback(error);
 			}
 			return callback(null, result);
 		});
 	},
-	deleteUserRole: (data, callback) => {
-		const deleteUserRole = query.deleteUserRole;
-		connection.query(deleteUserRole, [data], (error, result, fields) => {
+	//delete profile
+	deleteUserProfileByUser: (user_id, callback) => {
+		const deleteQuery = "DELETE FROM users_profile WHERE user_id = ?";
+
+		connection.query(deleteQuery, [user_id], (error, result) => {
 			if (error) {
 				return callback(error);
 			}
 			return callback(null, result);
 		});
 	},
+	//delete passwrod
+	deleteUserPasswordByUser: (user_id, callback) => {
+		const deleteQuery = "DELETE FROM users_password WHERE user_id = ?";
+
+		connection.query(deleteQuery, [user_id], (error, result) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+	deleteUsersInfoByUser: (user_id, callback) => {
+		const deleteQuery = "DELETE FROM users_info WHERE user_id = ?";
+
+		connection.query(deleteQuery, [user_id], (error, result) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+
+	deleteUsersRoleByUser: (user_id, callback) => {
+		const deleteQuery = "DELETE FROM users_role WHERE user_id = ?";
+
+		connection.query(deleteQuery, [user_id], (error, result) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+
+	deleteUsersByUser: (user_id, callback) => {
+		const deleteQuery = "DELETE FROM users WHERE user_id = ?";
+
+		connection.query(deleteQuery, [user_id], (error, result) => {
+			if (error) {
+				return callback(error);
+			}
+			return callback(null, result);
+		});
+	},
+
+	deleteUserAndRelatedData: (user_id, callback) => {
+		userService.deleteBillsByUserId(user_id, (err, results) => {
+			if (err) {
+				return callback(err);
+			}
+
+			userService.deleteUserMeterRead(user_id, (err, results) => {
+				if (err) {
+					return callback(err);
+				}
+
+				userService.deleteElectricMeterAddressByUser(
+					user_id,
+					(err, results) => {
+						if (err) {
+							return callback(err);
+						}
+
+						userService.deleteElectricMeterByUser(user_id, (err, results) => {
+							if (err) {
+								return callback(err);
+							}
+
+							userService.deleteUserProfileByUser(user_id, (err, results) => {
+								if (err) {
+									return callback(err);
+								}
+
+								userService.deleteUserPasswordByUser(
+									user_id,
+									(err, results) => {
+										if (err) {
+											return callback(err);
+										}
+
+										userService.deleteUsersInfoByUser(
+											user_id,
+											(err, results) => {
+												if (err) {
+													return callback(err);
+												}
+
+												userService.deleteUsersRoleByUser(
+													user_id,
+													(err, results) => {
+														if (err) {
+															return callback(err);
+														}
+
+														userService.deleteUsersByUser(user_id, callback);
+													}
+												);
+											}
+										);
+									}
+								);
+							});
+						});
+					}
+				);
+			});
+		});
+	},
+	// deleteUser: (data, callback) => {
+	// 	const deleteUser = query.deleteUser;
+	// 	connection.query(deleteUser, [data], (error, result) => {
+	// 		if (error) {
+	// 			return callback(error);
+	// 		}
+	// 		return callback(null, result);
+	// 	});
+	// },
+	// deleteUserInfo: (data, callback) => {
+	// 	const deleteUserInfo = query.deleteUserinfo;
+	// 	connection.query(deleteUserInfo, [data], (error, result, fields) => {
+	// 		if (error) {
+	// 			return callback(error);
+	// 		}
+	// 		return callback(null, result);
+	// 	});
+	// },
+	// deleteUserRole: (data, callback) => {
+	// 	const deleteUserRole = query.deleteUserRole;
+	// 	connection.query(deleteUserRole, [data], (error, result, fields) => {
+	// 		if (error) {
+	// 			return callback(error);
+	// 		}
+	// 		return callback(null, result);
+	// 	});
+	// },
 };
 
 export default userService;

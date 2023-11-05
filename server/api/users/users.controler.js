@@ -655,6 +655,122 @@ const userController = {
 	// 			return res.status(500).json({ msg: "Database connection error" });
 	// 		});
 	// },
+	deleteBillsByUserId: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteBillsByUserId(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Bills deleted successfully" });
+		});
+	},
+	deleteUserMeterRead: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUserMeterRead(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Meter reads deleted successfully" });
+		});
+	},
+	//delete electric meter address by user id
+	deleteElectricMeterAddressByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteElectricMeterAddressByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Electric meter addresses deleted successfully" });
+		});
+	},
+	//delete electricmeter
+	deleteElectricMeterByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteElectricMeterByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Electric meters deleted successfully" });
+		});
+	},
+	//delete profile
+	deleteUserProfileByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUserProfileByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "User profiles deleted successfully" });
+		});
+	},
+	//delete password
+	deleteUserPasswordByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUserPasswordByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "User passwords deleted successfully" });
+		});
+	},
+	deleteUsersInfoByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUsersInfoByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Users info deleted successfully" });
+		});
+	},
+
+	deleteUsersRoleByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUsersRoleByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Users roles deleted successfully" });
+		});
+	},
+
+	deleteUsersByUser: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUsersByUser(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "User deleted successfully" });
+		});
+	},
+	deleteUserAndRelatedData: (req, res) => {
+		const user_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteUserAndRelatedData(user_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "User and related data deleted successfully" });
+		});
+	},
 };
 
 export default userController;

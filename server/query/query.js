@@ -217,8 +217,16 @@ LEFT JOIN users_info ui ON up.user_id = ui.user_id
 LEFT JOIN users_password upw ON up.user_id = upw.user_id
 LEFT JOIN users u ON up.user_id = u.user_id
 WHERE up.user_id = ?`,
+
+	//delete User
+	deleteUserBill: `DELETE FROM bills
+WHERE electric_meter_id IN (SELECT electric_meter_id FROM electric_meter WHERE user_id = ?);`,
+	deleteUserMeterRead: `DELETE FROM meter_read WHERE user_id = ?;`,
+	deleteUserElectricAddress: `DELETE FROM electric_meter_address WHERE electric_meter_id IN (SELECT electric_meter_id FROM electric_meter WHERE user_id = ?);`,
+	deleteUserElectric: `DELETE FROM electric_meter WHERE user_id = ?;`,
+	deleteUserprofile: `DELETE FROM users_profile WHERE user_id = ?;`,
+	deleteUserPassword: `DELETE FROM users_password WHERE user_id = ?;`,
 	deleteUserinfo: `DELETE FROM users_info WHERE user_id = ?`,
 	deleteUserRole: `DELETE FROM users_role WHERE user_id = ?`,
 	deleteUser: `DELETE FROM users WHERE user_id = ?`,
-	deleteUserPassword: `DELETE FROM users WHERE user_id = ?`,
 };

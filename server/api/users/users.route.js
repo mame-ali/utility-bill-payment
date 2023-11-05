@@ -39,7 +39,10 @@ usersRouter.put("/updateUserRole/:user_id", userController.updateUserRole);
 
 usersRouter.put("/updateByAdmin/:user_id", userController.updateByAdmin);
 // usersRouter.put("/deleteuser", userController.deleteUser);
-usersRouter.delete("/deleteuser/:id", userController.deleteUser);
+// usersRouter.delete("/deleteuser/:id", userController.deleteUser);
+//delete user nw
+// usersRouter.delete("/deleteUser/:id", userController.deleteUsersByUser);
+usersRouter.delete("/deleteuser/:id", userController.deleteUserAndRelatedData);
 
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)

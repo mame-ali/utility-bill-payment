@@ -7,10 +7,8 @@ import "./read.css";
 
 const Read = () => {
 	const [electricMeterId, setElectricMeterId] = useState("");
-	const [account_number, setAccount_number] = useState("");
 	const [readData, setReadData] = useState("");
 	const [month, setMonth] = useState("");
-	const [readDate, setReadDate] = useState("");
 	const [users2, setUser2] = useState([]);
 	const [userData, setUserData] = useContext(UserContext);
 	const navigate = useNavigate();
@@ -57,7 +55,6 @@ const Read = () => {
 		e.preventDefault();
 		const formData = {
 			account_number: electricMeterId,
-			user_id: account_number,
 			read_data: readData,
 			month: month,
 			user_id: userData.user.id,
@@ -73,19 +70,19 @@ const Read = () => {
 	};
 
 	return (
-		<Container className="read">
-			<h1>Meter Read Form</h1>
+		<Container className="read d-block">
+			<h1 className="text-center">Meter Read Form</h1>
 			<Form onSubmit={handleSubmit}>
 				<Row>
 					<Col>
-						<Form.Group controlId="electricMeterId">
-							<Form.Label>Electric Meter ID</Form.Label>
+						<Form.Group controlId="electricMeterId" className="addElectric">
+							<Form.Label className="addElectric">Account Number</Form.Label>
 							<Form.Control
 								as="select"
 								value={electricMeterId}
 								onChange={(e) => setElectricMeterId(e.target.value)}
 							>
-								<option value="">Select Electric Meter ID</option>
+								<option value="">Select Account Number</option>
 								{users2.map((user) => (
 									<option key={user} value={user}>
 										{user}
@@ -95,8 +92,8 @@ const Read = () => {
 						</Form.Group>
 					</Col>
 					<Col>
-						<Form.Group controlId="readData">
-							<Form.Label>Read Data</Form.Label>
+						<Form.Group controlId="readData" className="addElectric">
+							<Form.Label className="addElectric">Read Data</Form.Label>
 							<Form.Control
 								type="number"
 								value={readData}
@@ -104,8 +101,8 @@ const Read = () => {
 								required
 							/>
 						</Form.Group>
-						<Form.Group controlId="month">
-							<Form.Label>Month</Form.Label>
+						<Form.Group controlId="month" className="addElectric">
+							<Form.Label className="addElectric">Month</Form.Label>
 							<Form.Select
 								value={month}
 								onChange={(e) => setMonth(e.target.value)}
@@ -121,7 +118,7 @@ const Read = () => {
 						</Form.Group>
 					</Col>
 				</Row>
-				<Button variant="primary" type="submit">
+				<Button variant="primary" type="submit" className="addElectric">
 					Submit
 				</Button>
 			</Form>

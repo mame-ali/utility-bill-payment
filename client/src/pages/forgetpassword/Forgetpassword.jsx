@@ -32,7 +32,17 @@ const ForgetPassword = () => {
 
 	return (
 		<Container className="large-container">
-			<div className="form-container">
+			<div
+				className="form-container"
+				style={{
+					maxWidth: "400px",
+					margin: "0 auto",
+					padding: "20px",
+					backgroundColor: "rgba(0, 0, 0, 0.5)",
+					borderRadius: "4px",
+					boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+				}}
+			>
 				<Typography variant="h4" className="mt-5 text-white">
 					Forgot Password
 				</Typography>

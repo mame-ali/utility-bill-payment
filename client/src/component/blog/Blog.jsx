@@ -31,13 +31,12 @@ export default function BlogSection() {
 							</div>
 							<div className="lower-content">
 								<div className="meta-info">
-									<a href="#">April 18, 2020</a>
-									<a href="#">Car Repairing</a>
+									<a href="#">April 18, 2023</a>
+									<a href="#">Electric Bill Payments</a>
 								</div>
 								<h3>
 									<a href="blog-details.html">
-										Sixteen tips for fix and repairs <br />
-										for starting problem
+										5 Tips for Easy <br /> Electricity Bill Payments
 									</a>
 								</h3>
 								<div className="link-btn">
@@ -60,12 +59,12 @@ export default function BlogSection() {
 							</div>
 							<div className="lower-content">
 								<div className="meta-info">
-									<a href="#">April 18, 2020</a>
-									<a href="#">Car Repairing</a>
+									<a href="#">July 18, 2022</a>
+									<a href="#">Payment Methods</a>
 								</div>
 								<h3>
 									<a href="blog-details.html">
-										What Soap Should Use <br /> for Washing
+										Streamlining Your Online <br /> Bill Payment Process
 									</a>
 								</h3>
 								<div className="link-btn">
@@ -88,13 +87,13 @@ export default function BlogSection() {
 							</div>
 							<div className="lower-content">
 								<div className="meta-info">
-									<a href="#">April 18, 2020</a>
-									<a href="#">Car Repairing</a>
+									<a href="#">April 18, 2022</a>
+									<a href="#">Other utilities</a>
 								</div>
 								<h3>
 									<a href="blog-details.html">
-										Low Hanging Fruit Two A <br />
-										Identify A Ballpark
+										Tips To Save <br />
+										Energy
 									</a>
 								</h3>
 								<div className="link-btn">

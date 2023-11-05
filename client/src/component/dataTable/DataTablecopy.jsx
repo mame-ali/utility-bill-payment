@@ -5,6 +5,7 @@ import axios from "../../utils/axios";
 import Show from "../add/Show";
 import { saveAs } from "file-saver";
 import { useReactToPrint } from "react-to-print";
+import { Edit, Delete, Visibility } from "@mui/icons-material";
 
 import { redirect, useNavigate } from "react-router-dom";
 // import "./DataTableCopy.css";
@@ -41,10 +42,13 @@ export default function DataTableCopy({ first, name }) {
 			return (
 				<div className="cellAction d-block">
 					<div className="viewButton btn btn-secondary" onClick={onClickView}>
-						View
+						<Visibility /> {/* Replace "View" with an eye icon */}
+					</div>
+					<div className="updateButton btn btn-primary" onClick={handleUpdate}>
+						<Edit /> {/* Replace "Update" with a pen icon */}
 					</div>
 					<div className="deleteButton btn btn-danger" onClick={onClickDelete}>
-						Delete
+						<Delete /> {/* Replace "Delete" with a trash icon */}
 					</div>
 				</div>
 			);
@@ -62,13 +66,13 @@ export default function DataTableCopy({ first, name }) {
 		}
 	};
 
-	const handleDelete = async (id) => {
+	const handleUpdate = async (id) => {
 		const data = {
 			user_id: id,
 			org_role_id: 2,
 		};
 		const confirmed = window.confirm(
-			`Are you sure? \n you want to  Delete ${first}`
+			`Are you sure? \n you want to  update ${first}`
 		);
 		if (confirmed) {
 			const response = await axios.put("users/assignrole", data);
@@ -77,7 +81,25 @@ export default function DataTableCopy({ first, name }) {
 			alert("delete canceled");
 		}
 	};
-
+	const handleDelete = async (id) => {
+		const confirmed = window.confirm(
+			`Are you sure? \n you want to delete ${first}`
+		);
+		if (confirmed) {
+			const response = await axios
+				.delete(`users/deleteElectricMeter/${id}`)
+				.then((response) => {
+					alert(response.data);
+					setDeleted(true); // Set deleted to true to trigger a state update
+				})
+				.catch((error) => {
+					alert(error);
+					console.error(error);
+				});
+		} else {
+			alert("delete canceled");
+		}
+	};
 	useEffect(() => {
 		if (deleted) {
 			setDeleted(false); // Reset the deleted state after it triggers a state update
