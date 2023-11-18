@@ -87,7 +87,7 @@ export default function DataTableCopy({ first, name }) {
 		);
 		if (confirmed) {
 			const response = await axios
-				.delete(`users/deleteElectricMeter/${id}`)
+				.delete(`users/deleteelectricdata/${id}`)
 				.then((response) => {
 					alert(response.data);
 					setDeleted(true); // Set deleted to true to trigger a state update

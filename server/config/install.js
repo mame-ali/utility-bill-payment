@@ -63,3 +63,7 @@ connection.query(query.transactionTableCreate, (error, results, fields) => {
 	if (error) console.log(error);
 	console.log("transactionTableCreate");
 });
+connection.query(query.notificationTableCreate, (error, results, fields) => {
+	if (error) console.log(error);
+	console.log("notificationTableCreate");
+});

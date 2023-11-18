@@ -7,7 +7,11 @@ electricRouter.get("/", (req, res) => {
 });
 
 electricRouter.post("/insertreaddata", electricController.createReadData);
-electricRouter.post(
+// electricRouter.post(
+// 	"/getmeterreadsid",
+// 	electricController.getMeterReadIbByAccount
+// );
+electricRouter.get(
 	"/getmeterreadsid",
 	electricController.getMeterReadIbByAccount
 );

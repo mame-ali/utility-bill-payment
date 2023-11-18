@@ -24,13 +24,13 @@ function HeaderTop() {
 									class="d-flex items-center justify-center flex-wrap justify-content-between mt-2"
 									data-v-61a126ab=""
 								>
-									<li data-v-61a126ab="">
+									{/* <li data-v-61a126ab="">
 										<button class="nav-link mr-4" data-v-61a126ab="">
 											<span data-v-61a126ab="">
 												<i class="fa fa-search" data-v-61a126ab=""></i>
 											</span>
 										</button>
-									</li>
+									</li> */}
 									<li data-v-61a126ab="">
 										<a
 											target="_blank"
@@ -38,7 +38,7 @@ function HeaderTop() {
 											class="nav-link social-media-btn facebook"
 											data-v-61a126ab=""
 										>
-											<i class="fab fa-facebook-f mr-4" data-v-61a126ab=""></i>
+											<i class="fab fa-facebook-f mr-5" data-v-61a126ab=""></i>
 										</a>
 									</li>
 									<li data-v-61a126ab="">
@@ -48,7 +48,7 @@ function HeaderTop() {
 											class="nav-link social-media-btn twitter"
 											data-v-61a126ab=""
 										>
-											<i class="fab fa-twitter mr-4" data-v-61a126ab=""></i>
+											<i class="fab fa-twitter mr-5" data-v-61a126ab=""></i>
 										</a>
 									</li>
 									<li data-v-61a126ab="">
@@ -59,7 +59,7 @@ function HeaderTop() {
 											data-v-61a126ab=""
 										>
 											<i
-												class="fab fa-telegram-plane mr-4"
+												class="fab fa-telegram-plane mr-5"
 												data-v-61a126ab=""
 											></i>
 										</a>
@@ -71,11 +71,11 @@ function HeaderTop() {
 											class="nav-link social-media-btn youtube"
 											data-v-61a126ab=""
 										>
-											<i class="fab fa-youtube mr-4" data-v-61a126ab=""></i>
+											<i class="fab fa-youtube mr-5" data-v-61a126ab=""></i>
 										</a>
 									</li>
 
-									<li data-v-61a126ab="" className="mr-3">
+									<li data-v-61a126ab="" className="mr-4">
 										<a
 											class="nav-link"
 											type="button"
@@ -85,7 +85,7 @@ function HeaderTop() {
 											FAQ
 										</a>
 									</li>
-									<li class="nav-item dropdown mr-4" data-v-61a126ab="">
+									{/* <li class="nav-item dropdown mr-4" data-v-61a126ab="">
 										<button title="Language" data-v-61a126ab="">
 											<span data-v-61a126ab="">EN</span>
 											<i class="fa fa-angle-down ml-1" data-v-61a126ab=""></i>
@@ -107,7 +107,7 @@ function HeaderTop() {
 												</button>
 											</li>
 										</ul>
-									</li>
+									</li> */}
 								</ul>
 							</div>
 						</div>

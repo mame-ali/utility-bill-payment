@@ -32,13 +32,15 @@ function HeaderTwo(props) {
 		setUserData({ ...userData, token: null }); // Update the token property
 		navigate("/login");
 		console.log(userData.token); // This may still log the old value due to closure, so it may not reflect the updated state immediately
+		window.location.reload();
 	};
 
 	return (
 		<div>
 			<header className="main-header header-style-one">
-				<HeaderTop />
+				{!userData.user && <HeaderTop />}
 				{/* <HeaderTopNew /> */}
+				{/* <HeaderTop /> */}
 				<div className="header-upper">
 					<div className="auto-container">
 						<div className="inner-container">
@@ -223,6 +225,17 @@ function HeaderTwo(props) {
 														</Link>
 													</li>
 												)}
+												{userData.user &&
+													userData.user.userRole == "normal" && (
+														<li>
+															<Link
+																to="/userbill"
+																style={{ textDecoration: "none" }}
+															>
+																Your Bill
+															</Link>
+														</li>
+													)}
 												{userData.user && userData.user.userRole == "admin" && (
 													<li>
 														<Link
@@ -233,6 +246,17 @@ function HeaderTwo(props) {
 														</Link>
 													</li>
 												)}
+												{userData.user &&
+													userData.user.userRole == "normal" && (
+														<li>
+															<Link
+																to="/manageuser"
+																style={{ textDecoration: "none" }}
+															>
+																Assign Role
+															</Link>
+														</li>
+													)}
 											</ul>
 										</div>
 									</nav>

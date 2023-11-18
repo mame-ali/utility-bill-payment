@@ -3,6 +3,7 @@ import DataTableCopy from "../../component/dataTable/DataTablecopy copy";
 import Add from "../../component/add//Add";
 import { UserContext } from "../../context/UserContext";
 // import { UserContext } from "../../context/UserContext";
+import "./bill.css";
 import { useNavigate } from "react-router-dom";
 
 const Bill = () => {
@@ -17,11 +18,11 @@ const Bill = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="bill_wrapper">
 			<div className="info centercontent">
-				<h1>Electric Bill</h1>
+				<h1 className="text-center">Electric Bill</h1>
 			</div>
-			{userData.user && <DataTableCopy first={`users/bills/`} />}
+			{userData.user && <DataTableCopy first={`users/bills`} />}
 		</div>
 	);
 };

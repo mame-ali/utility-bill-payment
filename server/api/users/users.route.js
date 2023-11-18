@@ -46,7 +46,11 @@ usersRouter.delete("/deleteuser/:id", userController.deleteUserAndRelatedData);
 //transaction
 
 usersRouter.post("/insertTransaction", userController.insertTransaction);
-
+usersRouter.delete(
+	"/deleteelectricdata/:id",
+	userController.deleteAllElectricDataById
+);
+usersRouter.post("/notification", userController.sendNotificationEmail);
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)
 // usersRouter.post('/login', userController.login)

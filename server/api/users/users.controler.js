@@ -537,7 +537,57 @@ const userController = {
 			.status(200)
 			.json({ status: "sucess", msg: "electric meter deleted sucessfully" });
 	},
-	//etUserBill
+	//delete electric meter address by electric meter id
+	deleteElectricMeterAddressById: (req, res) => {
+		const electric_meter_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteElectricMeterAddressById(
+			electric_meter_id,
+			(err, results) => {
+				if (err) {
+					console.log(err);
+					return res.status(500).json({ msg: "Database connection error" });
+				}
+				res.json({ msg: "Electric meter addresses deleted successfully" });
+			}
+		);
+	},
+	deleteMeterReadById: (req, res) => {
+		const electric_meter_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteMeterReadById(electric_meter_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Electric meter addresses deleted successfully" });
+		});
+	},
+	deleteElectricMeterById: (req, res) => {
+		const electric_meter_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteElectricMeterById(electric_meter_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Electric meter addresses deleted successfully" });
+		});
+	},
+	//delete all electric related Data
+	deleteAllElectricDataById: (req, res) => {
+		const electric_meter_id = req.params.id; // Assuming user_id is in the request parameters
+
+		userService.deleteAllElectricDataById(electric_meter_id, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			res.json({ msg: "Electric meter and related data deleted successfully" });
+		});
+	},
+
+	//e tUserBill
 	getUserBill: (req, res) => {
 		const user_id = req.params.user_id;
 		userService.getUserBill(user_id, (err, results) => {
@@ -554,7 +604,7 @@ const userController = {
 				console.log(err);
 				return res.status(500).json({ msg: "database connection err" });
 			}
-			console.log(results);
+			// console.log(results);
 			return res.status(200).json({ results });
 		});
 	},
@@ -780,7 +830,7 @@ const userController = {
 	//controller
 	//
 	insertTransaction: (req, res) => {
-		const { user_id, amount, payment_status } = req.body;
+		const { user_id, amount, payment_status, bill_id } = req.body;
 
 		// Validate the request data if needed
 
@@ -795,7 +845,13 @@ const userController = {
 				// You can use the paymentIntent.client_secret in your frontend to confirm the payment
 				// Call the service to insert the transaction data into your database
 				userService.insertTransaction(
-					{ user_id, amount, payment_status },
+					{
+						user_id,
+						bill_id,
+						amount,
+						payment_status,
+						stripe_token: paymentIntent.id,
+					},
 					(err, results) => {
 						if (err) {
 							console.error(err);
@@ -810,6 +866,37 @@ const userController = {
 				return res.status(500).json({ msg: "Stripe payment error" });
 			});
 	},
+	sendNotificationEmail: (req, res) => {
+		const { user_id, message, user_email, user_name } = req.body;
+		const month = new Date().toLocaleString("en-US", {
+			month: "long",
+			year: "numeric",
+		});
+
+		userService.insertNotification(
+			user_id,
+			month,
+			message,
+			user_name,
+			(err, result) => {
+				if (err) {
+					return res
+						.status(500)
+						.send("Something went wrong. Please try again later!");
+				}
+
+				transporter2.sendMail({
+					from: process.env.EMAIL,
+					to: user_email,
+					subject:
+						"Online Electricity and Water Bill Management System Reminders",
+					html: `<h5>Dear ${user_name},</h5><br>${message}<br>Best Regards,<br>OICT Solution Team`,
+				});
+
+				return res.status(200).json("Email Successfully sent");
+			}
+		);
+	},
 };
 
 export default userController;
@@ -818,7 +905,16 @@ export default userController;
 const generateRandomSixDigitNumber = () => {
 	return Math.floor(Math.random() * 900000 + 100000);
 };
-
+//send notification
+const transporter2 = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 587,
+	secure: false,
+	auth: {
+		user: process.env.EMAIL,
+		pass: process.env.EMAIL_PASSWORD,
+	},
+});
 // Function to send email
 const sendEmail = async (user_email, v_code) => {
 	try {

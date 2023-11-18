@@ -5,6 +5,7 @@ import axios from "../../utils/axios";
 import Show from "../add/Show";
 import { saveAs } from "file-saver";
 import { useReactToPrint } from "react-to-print";
+import { Edit, Delete, Visibility } from "@mui/icons-material";
 
 import { redirect, useNavigate } from "react-router-dom";
 // import "./DataTableCopy.css";
@@ -14,9 +15,9 @@ export default function DataTableCopy({ first, name }) {
 	const [reload, setReload] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [user, setUser] = useState([]);
-	const [bill, setBill] = useState([]);
+	// const [bill, setBill] = useState([]);
 	const [filteredUser, setFilteredUser] = useState([]);
-	const [filteredBill, setFilteredBill] = useState([]);
+	// const [filteredBill, setFilteredBill] = useState([]);
 	const componentRef = useRef(null);
 	const [selectedRowData, setSelectedRowData] = useState(null); // State to hold the single-clicked row data
 	let [alertdata, setAlertdata] = useState({});
@@ -43,10 +44,13 @@ export default function DataTableCopy({ first, name }) {
 			return (
 				<div className="cellAction d-block">
 					<div className="viewButton btn btn-secondary" onClick={onClickView}>
-						View
+						<Visibility /> {/* Replace "View" with an eye icon */}
+					</div>
+					<div className="updateButton btn btn-primary" onClick={handleUpdate}>
+						<Edit /> {/* Replace "Update" with a pen icon */}
 					</div>
 					<div className="deleteButton btn btn-danger" onClick={onClickDelete}>
-						Delete
+						<Delete /> {/* Replace "Delete" with a trash icon */}
 					</div>
 				</div>
 			);
@@ -56,23 +60,44 @@ export default function DataTableCopy({ first, name }) {
 	const fetchData = async () => {
 		try {
 			const response = await axios.get(first);
-			console.log(response.data.results);
+			// console.log(response.data.results);
+			setUser(response.data.results);
+			setFilteredUser(response.data.results);
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	const handleDelete = async (id) => {
+	const handleUpdate = async (id) => {
 		const data = {
 			user_id: id,
 			org_role_id: 2,
 		};
 		const confirmed = window.confirm(
-			`Are you sure? \n you want to  Delete ${first}`
+			`Are you sure? \n you want to  update ${first}`
 		);
 		if (confirmed) {
 			const response = await axios.put("users/assignrole", data);
 			console.log(response);
+		} else {
+			alert("delete canceled");
+		}
+	};
+	const handleDelete = async (id) => {
+		const confirmed = window.confirm(
+			`Are you sure? \n you want to delete ${first}`
+		);
+		if (confirmed) {
+			const response = await axios
+				.delete(`users/deleteElectricMeter/${id}`)
+				.then((response) => {
+					alert(response.data);
+					setDeleted(true); // Set deleted to true to trigger a state update
+				})
+				.catch((error) => {
+					alert(error);
+					console.error(error);
+				});
 		} else {
 			alert("delete canceled");
 		}
@@ -124,7 +149,7 @@ export default function DataTableCopy({ first, name }) {
 						columns={columns.concat(actionColumn)}
 						autoHeight
 						columnBuffer={0}
-						getRowId={(rows) => rows.user_id} // Specify the unique identifier using user_id
+						getRowId={(rows) => rows.bill_id} // Specify the unique identifier using user_id
 						slots={{ toolbar: GridToolbar }}
 						slotProps={{
 							toolbar: {

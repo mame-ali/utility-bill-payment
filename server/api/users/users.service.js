@@ -129,16 +129,16 @@ const userService = {
 			return callback(null, result);
 		});
 	},
-	getUserBill: (data, callback) => {
-		const getBillInfo = query.getBillInfo;
+	// getUserBill: (data, callback) => {
+	// 	const getBillInfo = query.getBillInfo;
 
-		connection.query(getBillInfo, [data], (error, result, fields) => {
-			if (error) {
-				return callback(error);
-			}
-			return callback(null, result);
-		});
-	},
+	// 	connection.query(getBillInfo, [data], (error, result, fields) => {
+	// 		if (error) {
+	// 			return callback(error);
+	// 		}
+	// 		return callback(null, result);
+	// 	});
+	// },
 
 	getAllUsersBill: (callback) => {
 		const getAllBill = query.getAllBill;
@@ -394,29 +394,85 @@ const userService = {
 	},
 
 	//delete Electric Meter Address
-	deleteElectricMeterAddress: (data, callback) => {
-		const deleteElectricMeterAddress = query.deleteElectricMeterAddress;
-		connection.query(
-			deleteElectricMeterAddress,
-			[data],
-			(error, result, fields) => {
-				if (error) {
-					return callback(error);
-				}
-				return callback(null, result);
-			}
-		);
-	},
+	// deleteElectricMeterAddressById: (data, callback) => {
+	// 	const deleteElectricMeterAddressById = query.deleteElectricMeterAddressById;
+	// 	connection.query(
+	// 		deleteElectricMeterAddressById,
+	// 		[data],
+	// 		(error, result, fields) => {
+	// 			if (error) {
+	// 				return callback(error);
+	// 			}
+	// 			return callback(null, result);
+	// 		}
+	// 	);
+	// },
+	// deleteMeterReadById: (data, callback) => {
+	// 	const deleteMeterReadById = query.deleteMeterReadById;
+	// 	connection.query(deleteMeterReadById, [data], (error, result, fields) => {
+	// 		if (error) {
+	// 			return callback(error);
+	// 		}
+	// 		return callback(null, result);
+	// 	});
+	// },
 
 	//delete Electric Meter
-	deleteElectricMeter: (data, callback) => {
-		const deleteElectricMeter = query.deleteElectricMeter;
-		connection.query(deleteElectricMeter, [data], (error, result, fields) => {
-			if (error) {
-				return callback(error);
+	// deleteElectricMeterById: (data, callback) => {
+	// 	const deleteElectricMeterById = query.deleteElectricMeterById;
+	// 	connection.query(
+	// 		deleteElectricMeterById,
+	// 		[data],
+	// 		(error, result, fields) => {
+	// 			if (error) {
+	// 				return callback(error);
+	// 			}
+	// 			return callback(null, result);
+	// 		}
+	// 	);
+	// },
+
+	//delete electric and related Data
+	deleteAllElectricDataById: (data, callback) => {
+		const deleteElectricMeterAddressById = query.deleteElectricMeterAddressById;
+		const deleteMeterReadById = query.deleteMeterReadById;
+		const deleteElectricMeterById = query.deleteElectricMeterById;
+
+		// Delete electric meter address
+		connection.query(
+			deleteElectricMeterAddressById,
+			[data],
+			(error1, result1, fields1) => {
+				if (error1) {
+					return callback(error1);
+				}
+
+				// Delete meter reading
+				connection.query(
+					deleteMeterReadById,
+					[data],
+					(error2, result2, fields2) => {
+						if (error2) {
+							return callback(error2);
+						}
+
+						// Delete electric meter
+						connection.query(
+							deleteElectricMeterById,
+							[data],
+							(error3, result3, fields3) => {
+								if (error3) {
+									return callback(error3);
+								}
+
+								// If all deletions are successful, return the result of the last query
+								return callback(null, result3);
+							}
+						);
+					}
+				);
 			}
-			return callback(null, result);
-		});
+		);
 	},
 
 	getUserProf: (data, callback) => {
@@ -671,7 +727,13 @@ const userService = {
 		// Execute the SQL query
 		connection.query(
 			insertTransaction,
-			[data.user_id, data.amount, data.payment_status],
+			[
+				data.user_id,
+				data.bill_id,
+				data.amount,
+				data.payment_status,
+				data.stripe_token,
+			],
 			(error, results) => {
 				if (error) {
 					console.error("MySQL error:", error);
@@ -680,6 +742,31 @@ const userService = {
 				return callback(null, results);
 			}
 		);
+	},
+	//notification service
+	insertNotification: (user_id, month, message, user_name, callback) => {
+		const insertNotification = query.insertNotification;
+		connection.query(
+			insertNotification,
+			[user_id, month, message, user_name],
+			(err, result) => {
+				if (err) {
+					console.log("MySQL insert error:", err);
+					return callback(err, null);
+				}
+				return callback(null, result);
+			}
+		);
+	},
+	getNotificationsByUserId: (user_id, callback) => {
+		const getNotification = query.getNotification;
+		connection.query(getNotification, [user_id], (err, results) => {
+			if (err) {
+				console.log("MySQL select error:", err);
+				return callback(err, null);
+			}
+			return callback(null, results);
+		});
 	},
 };
 

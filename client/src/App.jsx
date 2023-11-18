@@ -45,6 +45,19 @@ import Faq from "./pages/faq/Faq";
 import Fo4 from "./component/fo4/Fo4";
 import Payment3 from "./pages/payment/Payment3";
 import Transaction from "./pages/transaction/Transaction";
+// import AdminMenu from "./component/adminMenu/AdminMenu";
+import AdminPage from "./pages/admin/AdminUser";
+import Paytm from "./component/Paytm";
+import EachBill from "./pages/billForm/EachBill";
+import UserBill from "./pages/userBill/UserBill";
+import Notification from "./pages/notification/Notification";
+import AdminElectric from "./pages/admin/AdminElec";
+import AdminUser from "./pages/admin/AdminUser";
+import AdminBill from "./pages/admin/AdminBills";
+import AdminDash from "./pages/admin/AdminDash";
+import AdminAssignRole from "./pages/admin/AdminAssignRole";
+// import AdminPage2 from "./pages/admin/Adminpage2";
+
 function App() {
 	return (
 		<>
@@ -69,22 +82,31 @@ function App() {
 				<Route path="/prepaid" element={<Prepaid />} />
 				<Route path="/bill-info" element={<BillInformation />} />
 				<Route path="/getting-electric" element={<GettingElectric />} />
-				<Route path="/electricmeter" element={<Electric />} />
-				<Route path="/users" element={<Users />} />
-				<Route path="/bills" element={<Bill />} />
+				<Route path="/admin/electricmeter" element={<AdminElectric />} />
+				<Route path="/admin/users" element={<AdminUser />} />
+				<Route path="/admin/bills" element={<AdminBill />} />
+				<Route path="/admin/dashboard" element={<AdminDash />} />
 				<Route
-					path="/addelectricmeter"
+					path="/admin/addelectricmeter"
 					element={
 						<>
 							<AddElectricMeter />
 						</>
 					}
 				/>
+
+				<Route path="/admin/assignrole" element={<AdminAssignRole />} />
 				<Route path="/read" element={<Read />} />
-				<Route path="/manageuser" element={<Manageuser />} />
+				{/* <Route path="/manageuser" element={<Manageuser />} /> */}
 				<Route path="/payment" element={<Payment2 />} />
 				<Route path="/payment3" element={<Payment3 />} />
 				<Route path="/transaction" element={<Transaction />} />
+				{/* <Route path="/admin/admindashboard" element={<AdminPage />} /> */}
+				<Route path="/paytm" element={<Paytm />} />
+				<Route path="/eachbill" element={<EachBill />} />
+				<Route path="/userbill" element={<UserBill />} />
+				<Route path="/notification" element={<Notification />} />
+				{/* <Route path="/admin" element={<AdminPage2 />} /> */}
 
 				<Route path="/*" element={<Fo4 />} />
 				{/* <Route path="/electricmeter" element={<Electric />} />

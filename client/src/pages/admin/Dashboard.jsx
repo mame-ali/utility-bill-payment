@@ -10,23 +10,12 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
-function ServicesSection() {
+function Dashboard() {
 	const [userData, setUserData] = useContext(UserContext);
 
 	return (
-		<section className="services-section">
-			<div className="auto-container">
-				<div className="sec-title style-two">
-					<h2>Our Featured Services</h2>
-
-					<div className="text">
-						Bring to the table win-win survival strategies to ensure proactive
-						domination. At the end of the day, going forward, a new normal that
-						has evolved from generation X is on the runway heading towards a
-						streamlined cloud solution.
-					</div>
-				</div>
-
+		<section className="services-section mt-3 pt-1">
+			<div className="auto-container mt-0 pt-0">
 				<div className="row">
 					<div className="col-lg-4 service-block-one">
 						<div className="inner-box hvr-float-shadow">
@@ -55,8 +44,8 @@ function ServicesSection() {
 					<div className="col-lg-4 service-block-one">
 						<div className="inner-box hvr-float-shadow">
 							<h5>Electricity Bill Payment</h5>
-							<h2>Bill Information</h2>
-							<Link to="/bill-info" className="read-more">
+							<h2>Your Bill Info</h2>
+							<Link to="/userbill" className="read-more">
 								read more +
 							</Link>
 							<div className="icon">
@@ -91,7 +80,7 @@ function ServicesSection() {
 					<div className="col-lg-4 service-block-one">
 						<div className="inner-box hvr-float-shadow">
 							<h5>Electricity Bill Payment</h5>
-							<h2>Customer Service Center</h2>
+							<h2>Customer Service</h2>
 							<Link to="/customer-service" className="read-more">
 								read more +
 							</Link>
@@ -106,4 +95,4 @@ function ServicesSection() {
 	);
 }
 
-export default ServicesSection;
+export default Dashboard;

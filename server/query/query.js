@@ -96,17 +96,41 @@ export default {
     REFERENCES electric_meter (electric_meter_id)
 );
 `,
+	// transactionTableCreate: `CREATE TABLE IF NOT EXISTS transactions (
+	//   transaction_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	//   user_id INT NOT NULL,
+	//   bill_id INT NOT NULL,
+	//   amount DECIMAL(10, 2) NOT NULL,
+	//   currency VARCHAR(3) NOT NULL,
+	//   payment_status VARCHAR(20) NOT NULL,
+	//   payment_method VARCHAR(20) NOT NULL,
+	//   stripe_token VARCHAR(255) NOT NULL,  -- This column is used to store the Stripe token
+	//   created_at DATETIME NOT NULL,
+	//   FOREIGN KEY (user_id) REFERENCES users (user_id),
+	//   FOREIGN KEY (bill_id) REFERENCES bills (bill_id)
+	// );`,
 	transactionTableCreate: `CREATE TABLE IF NOT EXISTS transactions (
-    transaction_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
-    currency VARCHAR(3) NOT NULL,
-    payment_status VARCHAR(20) NOT NULL,
-    payment_method VARCHAR(20) NOT NULL,
-    stripe_token VARCHAR(255) NOT NULL,  -- This column is used to store the Stripe token
-    created_at DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (user_id)
-  );`,
+  transaction_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  bill_id INT NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  currency VARCHAR(3) NOT NULL,
+  payment_status VARCHAR(20) NOT NULL,
+  payment_method VARCHAR(20) NOT NULL,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (user_id),
+  FOREIGN KEY (bill_id) REFERENCES bills (bill_id)
+);`,
+
+	notificationTableCreate: `CREATE TABLE IF NOT EXISTS notifications (
+  notification_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  month VARCHAR(255),
+  message TEXT,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+`,
 
 	getUserByEmail: `select * from users WHERE USER_email=?;`,
 	getOTPByEmail: `select * from users WHERE USER_email=? and otp =?;`,
@@ -134,8 +158,10 @@ export default {
 	updateElectricMeterAddress: `UPDATE electric_meter_address
             SET region = ?, zone = ?, wereda = ?, subcity = ?, kebele = ?, house_number = ?
             WHERE electric_meter_address_id = ?;`,
-	deleteElectricMeterAddress: `DELETE FROM electric_meter_address WHERE electric_meter_id = ?`,
-	deleteElectricMeter: `DELETE FROM electric_meter WHERE electric_meter_id = ?`,
+	deleteElectricMeterAddressById: `DELETE FROM electric_meter_address WHERE electric_meter_id = ?`,
+
+	deleteMeterReadById: `DELETE FROM meter_read WHERE electric_meter_id = ?`,
+	deleteElectricMeterById: `DELETE FROM electric_meter WHERE electric_meter_id = ?`,
 
 	insertReadData: `INSERT INTO meter_read (electric_meter_id, user_id, read_data, month, read_date) VALUES (?, ?, ?, ?,NOW());`,
 
@@ -145,6 +171,21 @@ export default {
                m.read_data, m.month, m.read_date FROM bills AS b JOIN electric_meter AS e ON b.electric_meter_id = e.electric_meter_id
               JOIN meter_read AS m ON b.electric_meter_id = m.electric_meter_id
               JOIN users AS u ON e.user_id = u.user_id WHERE e.account_number = ?`,
+
+	//Get individual userbill
+	getUserBill: `SELECT 
+  bills.*,
+  electric_meter.account_number,
+  users_info.f_name,
+  users_info.l_name
+FROM
+  bills
+JOIN electric_meter ON bills.electric_meter_id = electric_meter.electric_meter_id
+JOIN users ON electric_meter.user_id = users.user_id
+JOIN users_info ON users.user_id = users_info.user_id
+WHERE
+  electric_meter.account_number =?;
+`,
 
 	getAllUsersData: `SELECT * FROM users
         JOIN users_info ON users.user_id = users_info.user_id
@@ -241,7 +282,10 @@ WHERE electric_meter_id IN (SELECT electric_meter_id FROM electric_meter WHERE u
 	deleteUserRole: `DELETE FROM users_role WHERE user_id = ?`,
 	deleteUser: `DELETE FROM users WHERE user_id = ?`,
 	//transaction query
-	insertTransaction: `INSERT INTO transactions (user_id, amount, currency, payment_status, payment_method, created_at)
-  VALUES (?, ?, 'USD', ?, 'credit_card', NOW());
+	insertTransaction: `INSERT INTO transactions (user_id, bill_id, amount, currency, payment_status, payment_method, created_at)
+  VALUES (?, ?, ?, 'USD', ?, 'credit_card', NOW());
   `,
+	//notification
+	insertNotification: `INSERT INTO notifications (user_id, month, message,created_at ) VALUES (?, ?, ?, NOW())`,
+	getNotification: `SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC`,
 };

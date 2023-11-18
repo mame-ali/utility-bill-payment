@@ -1,4 +1,4 @@
-import  billsService from "./bills.service.js";
+import billsService from "./bills.service.js";
 //Importing bcryptJs module to use password encryption
 import bcrypt from "bcryptjs";
 //Importing database structure
@@ -11,19 +11,30 @@ dotenv.config();
 let verify_data;
 
 const billsController = {
-    // get bill information
-    getbillByAccount: (req, res) =>
-    {
-        const account_number = req.params.account_number;
-        billsService.getBillByAccount(account_number, (err, results) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).json({ msg: "database connection err" });
-        }
-         return res.status(200).json({ data: results });
-        });  
-    }
+	// get bill information
+	// getbillByAccount: (req, res) =>
+	// {
+	//     const account_number = req.params.account_number;
+	//     billsService.getBillByAccount(account_number, (err, results) => {
+	//     if (err) {
+	//         console.log(err);
+	//         return res.status(500).json({ msg: "database connection err" });
+	//     }
+	//      return res.status(200).json({ data: results });
+	//     });
+	// },
+	getBillByAccount: (req, res) => {
+		const accountNumber = req.params.account_number;
+		// const accountNumber = req.body;
 
-}
+		billsService.getBillByAccount(accountNumber, (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "Database connection error" });
+			}
+			return res.status(200).json({ data: results });
+		});
+	},
+};
 
 export default billsController;

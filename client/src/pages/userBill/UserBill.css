@@ -1,0 +1,42 @@
+/* userBill.css */
+
+.user-bill-container {
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.user-bill-input {
+	margin-bottom: 10px;
+}
+
+.user-bill-button {
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.user-bill-info {
+	margin-top: 20px;
+}
+
+.user-bill-info h2 {
+	margin-bottom: 10px;
+}
+
+.user-bill-info ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.user-bill-info li {
+	margin-bottom: 10px;
+}
+
+/* .user-bill-container {
+	background-color: rgb(86, 164, 150);
+} */
